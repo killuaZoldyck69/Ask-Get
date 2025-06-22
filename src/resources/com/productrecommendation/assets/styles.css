@@ -1,0 +1,99 @@
+/* Global styles */
+.main-container {
+    -fx-background-color: white;
+}
+
+/* Left side with illustration */
+.left-side {
+    -fx-background-color: #5ee0b8;
+    /*-fx-background-radius: 0 20 20 0;*/
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 10, 0, 0, 0);
+}
+
+/* Right side with login form */
+.login-form-container {
+    -fx-padding: 30;
+    -fx-background-color: white;
+}
+
+/* Text styling */
+.header-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-text-fill: #333333;
+}
+
+.subtitle-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+    -fx-padding: 0 0 10 0;
+}
+
+.field-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+}
+
+/* Form elements */
+.text-field {
+    -fx-background-color: white;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 4px;
+    -fx-padding: 10 15;
+    -fx-font-size: 14px;
+}
+
+.login-button {
+    -fx-background-color: #00c9a7;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 12 20;
+    -fx-background-radius: 4px;
+    -fx-cursor: hand;
+}
+
+.login-button:hover {
+    -fx-background-color: #00b396;
+}
+
+.google-login-button {
+    -fx-background-color: #ffeded;
+    -fx-text-fill: #ff4c4c;
+    -fx-font-weight: bold;
+    -fx-padding: 12 20;
+    -fx-background-radius: 4px;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-graphic-text-gap: 10;
+}
+
+.google-login-button:hover {
+    -fx-background-color: #ffdfdf;
+}
+
+.forgot-password-link {
+    -fx-text-fill: #666666;
+    -fx-font-size: 12px;
+    -fx-border-color: transparent;
+    -fx-underline: false;
+}
+
+.forgot-password-link:hover {
+    -fx-text-fill: #00c9a7;
+}
+
+.signup-link {
+    -fx-text-fill: #00c9a7;
+    -fx-font-weight: bold;
+    -fx-underline: false;
+}
+
+.signup-link:hover {
+    -fx-text-fill: #00b396;
+}
+
+.or-label {
+    -fx-text-fill: #999999;
+    -fx-font-size: 12px;
+}
