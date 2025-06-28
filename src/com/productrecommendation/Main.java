@@ -14,7 +14,7 @@ public class Main extends Application {
         try {
             // Method 1: Using getClass().getResource() with correct path
             // Make sure the path starts with a forward slash
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/com/productrecommendation/fxml/Login.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/com/productrecommendation/fxml/Dashboard.fxml"));
 
             // Alternative Method 2: If Method 1 doesn't work, try this
             // FXMLLoader loader = new FXMLLoader();
@@ -24,7 +24,7 @@ public class Main extends Application {
             // String absolutePath = System.getProperty("user.dir") + "/src/main/resources/com/productrecommendation/fxml/Login.fxml";
             // FXMLLoader loader = new FXMLLoader(new File(absolutePath).toURI().toURL());
             // Print the resource URL to help debug
-            System.out.println("Attempting to load: " + getClass().getResource("/com/productrecommendation/fxml/Login.fxml"));
+            System.out.println("Attempting to load: " + getClass().getResource("/com/productrecommendation/fxml/Dashboard.fxml"));
 
             Parent root = loader.load();
             Scene scene = new Scene(root);
