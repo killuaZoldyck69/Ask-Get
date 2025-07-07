@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.productrecommendation.controllers.QueryCardController"
+            style="-fx-background-color: white; -fx-border-color: #dcdcdc; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 16;" prefWidth="380" prefHeight="260">
+    <children>
+        <VBox spacing="10.0">
+            <HBox spacing="10.0" alignment="CENTER_LEFT">
+                <ImageView fx:id="productImage" fitHeight="40" fitWidth="40" />
+                <VBox>
+                    <Label fx:id="productName" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
+                    <Label fx:id="productBrand" style="-fx-font-size: 12px; -fx-text-fill: gray;" />
+                </VBox>
+                <Label fx:id="category" style="-fx-background-color: #dfe6e9; -fx-padding: 2 6; -fx-background-radius: 5; -fx-font-size: 10;" />
+            </HBox>
+
+            <Label fx:id="queryTitle" wrapText="true" style="-fx-text-fill: red; -fx-font-size: 16px; -fx-font-weight: bold;" />
+
+            <VBox>
+                <Label text="Boycotting Reason:" style="-fx-font-weight: bold;" />
+                <Label fx:id="boycottReason" wrapText="true" maxHeight="70" style="-fx-text-fill: #555;" />
+                <Hyperlink fx:id="readMore" text="Read more" visible="false" />
+            </VBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <ImageView fx:id="userPhoto" fitHeight="20" fitWidth="20" />
+                <Label fx:id="postedBy" style="-fx-font-size: 12;" />
+                <Label fx:id="postedDate" style="-fx-font-size: 12; -fx-text-fill: gray;" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="likes" text="♥ 1" style="-fx-font-size: 12;" />
+            </HBox>
+        </VBox>
+    </children>
+</AnchorPane>

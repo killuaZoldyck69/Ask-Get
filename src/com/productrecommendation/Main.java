@@ -24,7 +24,7 @@ public class Main extends Application {
             // String absolutePath = System.getProperty("user.dir") + "/src/main/resources/com/productrecommendation/fxml/Login.fxml";
             // FXMLLoader loader = new FXMLLoader(new File(absolutePath).toURI().toURL());
             // Print the resource URL to help debug
-            System.out.println("Attempting to load: " + getClass().getResource("/com/productrecommendation/fxml/Dashboard.fxml"));
+            System.out.println("Attempting to load: " + getClass().getResource("/com/productrecommendation/fxml/QueryCard.fxml"));
 
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -32,7 +32,7 @@ public class Main extends Application {
             primaryStage.setTitle("Ask&Get - Product Recommendation System");
             primaryStage.setScene(scene);
             // Full screen mode
-            primaryStage.setFullScreen(true);
+//            primaryStage.setFullScreen(true);
             primaryStage.setFullScreenExitHint("");
             primaryStage.show();
 
