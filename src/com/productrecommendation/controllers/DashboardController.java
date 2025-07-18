@@ -4,7 +4,8 @@
  */
 package com.productrecommendation.controllers;
 
-import com.productrecommendation.models.Query;
+//import com.productrecommendation.models.Query;
+//import com.productrecommendation.models.QueryApiService;
 import java.io.IOException;
 import java.net.URL;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -16,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -57,11 +59,9 @@ public class DashboardController {
     private VBox welcomeScreen;
     @FXML
     private ScrollPane profileSection;
-    @FXML
     private TextField usernameField;
     @FXML
     private TextField emailField;
-    @FXML
     private TextField fullNameField;
     @FXML
     private TextField phoneField;
@@ -105,6 +105,12 @@ public class DashboardController {
     private VBox recommendationsForMeSection;
     @FXML
     private VBox recommendationsForMeContainer;
+    @FXML
+    private TextField displayNameField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private TextField registrationField;
 
     @FXML
     private void handleLogout(ActionEvent event) {
@@ -143,85 +149,55 @@ public class DashboardController {
         recommendationsForMeSection.setVisible(false);
     }
 
-    @FXML
     public void initialize() {
         System.out.println("allQueriesSection = " + allQueriesSection);
     }
 
-    @FXML
-    private ObservableList<Query> getSampleQueries() {
-        ObservableList<Query> queries = FXCollections.observableArrayList();
-
-        queries.add(new Query(
-                "Coca-Cola: Quenching Israel’s genocidal soldiers’ thirst",
-                "Coca-Cola",
-                "Soft Drinks",
-                "The Coca-Cola Company",
-                "https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/Coca_Cola_Flasche_-_Original_Taste.jpg/1200px-Coca_Cola_Flasche_-_Original_Taste.jpg",
-                "Because Coca-Cola is implicated in Israeli war crimes. According to research by WhoProfits, the Central Beverage Company, known as Coca-Cola Israel, which is the exclusive franchisee of the Coca-Cola Company in Israel, operates a regional distribution center and cooling houses in the Atarot Settlement Industrial Zone...",
-                "Nahid Hasan",
-                "nh694225@gmail.com",
-                "https://lh3.googleusercontent.com/a/ACg8ocLph06TzFGSCFfsuwtR8fvToQN3wUcXkCEmRnjCrVVjPT9OBrj4=s96-c",
-                "2024-12-27",
-                1
-        ));
-
-        queries.add(new Query(
-                "Hasina sued for genocide, crimes against humanity",
-                "Sheikh Hasina",
-                "Prime Minister",
-                " Awami League",
-                "https://pbs.twimg.com/media/GUSKNgxWUAA9TWL.jpg",
-                "A complaint was filed with the investigation agency of the International Crimes Tribunal yesterday accusing former prime minister Sheikh Hasina and eight others of committing crimes against humanity and genocide between July 15 and August 5.\n\nSupreme Court lawyer Gazi MH Tamim filed the complaint on behalf of Bulbul Kabir...",
-                "Nahid Hasan",
-                "nh694225@gmail.com",
-                "https://lh3.googleusercontent.com/a/ACg8ocLph06TzFGSCFfsuwtR8fvToQN3wUcXkCEmRnjCrVVjPT9OBrj4=s96-c",
-                "2024-12-27",
-                4
-        ));
-
-        return queries;
-    }
-
+//    @FXML
+// private ObservableList<Query> fetchLiveQueries() {
+//    return FXCollections.observableArrayList(QueryApiService.fetchAllQueries());
+//}
+//
+//
+//@FXML
     @FXML
     private void showAllQueries() {
-        hideAllSections();  // Hide all other sections
-        allQueriesSection.setVisible(true);  // Show the "All Queries" section
+//    hideAllSections();
+//    allQueriesSection.setVisible(true);
+//
+//    if (queryCardContainer == null) {
+//        System.err.println("queryCardContainer is null. Check your FXML.");
+//        return;
+//    }
+//
+//    queryCardContainer.getChildren().clear();
+//
+//    // 🔁 Use real data from backend
+//    ObservableList<Query> liveQueries = fetchLiveQueries();
+//
+//    for (Query q : liveQueries) {
+//        try {
+//            URL fxmlLocation = getClass().getResource("/resources/com/productrecommendation/fxml/QueryCard.fxml");
+//
+//            if (fxmlLocation == null) {
+//                System.err.println("QueryCard.fxml not found.");
+//                continue;
+//            }
+//
+//            FXMLLoader loader = new FXMLLoader(fxmlLocation);
+//            Node card = loader.load();
+//
+//            QueryCardController controller = loader.getController();
+//            controller.setData(q);
+//
+//            queryCardContainer.getChildren().add(card);
+//
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
+}
 
-        // Ensure the container is not null
-        if (queryCardContainer == null) {
-            System.err.println("queryCardContainer is null. Check your FXML and fx:id.");
-            return;
-        }
-
-        queryCardContainer.getChildren().clear();  // Clear previous cards
-
-        for (Query q : getSampleQueries()) {
-            try {
-                // Load QueryCard.fxml
-                URL fxmlLocation = getClass().getResource("/resources/com/productrecommendation/fxml/QueryCard.fxml");
-
-                if (fxmlLocation == null) {
-                    System.err.println("QueryCard.fxml not found! Check the path.");
-                    continue;
-                }
-
-                FXMLLoader loader = new FXMLLoader(fxmlLocation);
-                Node card = loader.load();
-
-                // Get the controller and set query data
-                QueryCardController controller = loader.getController();
-                controller.setData(q);
-
-                // Add the card to the FlowPane
-                queryCardContainer.getChildren().add(card);
-
-            } catch (IOException e) {
-                System.err.println("Failed to load QueryCard.fxml:");
-                e.printStackTrace();
-            }
-        }
-    }
 
     @FXML
     private void showMyQueries(ActionEvent event) {
@@ -241,6 +217,10 @@ public class DashboardController {
 
     @FXML
     private void refreshRecommendations(ActionEvent event) {
+    }
+
+    @FXML
+    private void resetProfile(ActionEvent event) {
     }
 
 }

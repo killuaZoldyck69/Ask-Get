@@ -1,37 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.geometry.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.productrecommendation.controllers.QueryCardController"
-            style="-fx-background-color: white; -fx-border-color: #dcdcdc; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 16;" prefWidth="380" prefHeight="260">
+            style="-fx-background-color: #ffffff; -fx-border-radius: 12; -fx-background-radius: 12; -fx-padding: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 6, 0.3, 0, 2);"
+            prefWidth="420" prefHeight="280">
+
     <children>
-        <VBox spacing="10.0">
-            <HBox spacing="10.0" alignment="CENTER_LEFT">
-                <ImageView fx:id="productImage" fitHeight="40" fitWidth="40" />
-                <VBox>
-                    <Label fx:id="productName" style="-fx-font-size: 14px; -fx-font-weight: bold;" />
-                    <Label fx:id="productBrand" style="-fx-font-size: 12px; -fx-text-fill: gray;" />
+        <VBox spacing="14.0">
+            <!-- Top section: Product and category -->
+            <HBox spacing="12.0" alignment="CENTER_LEFT">
+                <ImageView fx:id="productImage" fitWidth="50" fitHeight="50" style="-fx-background-radius: 25; -fx-border-radius: 25;" />
+                <VBox alignment="CENTER_LEFT">
+                    <Label fx:id="productName" style="-fx-font-size: 15px; -fx-font-weight: bold;" />
+                    <Label fx:id="productBrand" style="-fx-font-size: 12px; -fx-text-fill: #888;" />
                 </VBox>
-                <Label fx:id="category" style="-fx-background-color: #dfe6e9; -fx-padding: 2 6; -fx-background-radius: 5; -fx-font-size: 10;" />
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="category" style="-fx-background-color: #e0f7fa; -fx-text-fill: #00796b; -fx-padding: 4 10; -fx-background-radius: 10; -fx-font-size: 10px;" />
             </HBox>
 
-            <Label fx:id="queryTitle" wrapText="true" style="-fx-text-fill: red; -fx-font-size: 16px; -fx-font-weight: bold;" />
+            <!-- Query Title -->
+            <Label fx:id="queryTitle" wrapText="true" style="-fx-text-fill: #d32f2f; -fx-font-size: 17px; -fx-font-weight: bold;" />
 
-            <VBox>
-                <Label text="Boycotting Reason:" style="-fx-font-weight: bold;" />
-                <Label fx:id="boycottReason" wrapText="true" maxHeight="70" style="-fx-text-fill: #555;" />
-                <Hyperlink fx:id="readMore" text="Read more" visible="false" />
+            <!-- Boycott Reason -->
+            <VBox spacing="5">
+                <Label text="Boycotting Reason:" style="-fx-font-weight: bold; -fx-font-size: 13px;" />
+                <Label fx:id="boycottReason" wrapText="true" maxHeight="70" style="-fx-text-fill: #444;" />
+                <Hyperlink fx:id="readMore" text="Read more" visible="false" style="-fx-font-size: 12px;" />
             </VBox>
 
+            <!-- Bottom section: User and Meta -->
             <HBox spacing="10" alignment="CENTER_LEFT">
-                <ImageView fx:id="userPhoto" fitHeight="20" fitWidth="20" />
-                <Label fx:id="postedBy" style="-fx-font-size: 12;" />
-                <Label fx:id="postedDate" style="-fx-font-size: 12; -fx-text-fill: gray;" />
+                <ImageView fx:id="userPhoto" fitWidth="24" fitHeight="24" style="-fx-clip-shape: circle;" />
+                <Label fx:id="postedBy" style="-fx-font-size: 12px; -fx-font-weight: 600;" />
+                <Label fx:id="postedDate" style="-fx-font-size: 11px; -fx-text-fill: #999;" />
                 <Region HBox.hgrow="ALWAYS" />
-                <Label fx:id="likes" text="♥ 1" style="-fx-font-size: 12;" />
+                <Label fx:id="likes" text="♥ 1" style="-fx-font-size: 13px; -fx-text-fill: #e53935;" />
             </HBox>
         </VBox>
     </children>
