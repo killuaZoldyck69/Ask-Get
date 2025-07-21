@@ -5,7 +5,384 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
-    
-</AnchorPane>
+
+<VBox  xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.productrecommendation.controllers.ProfileController">
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+   
+    <!-- Profile Header -->
+    <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+        <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+        </padding>
+      
+        <!-- Profile Image -->
+        <Region prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #4F46E5; -fx-background-radius: 40; -fx-background-image: url('https://via.placeholder.com/80x80/4F46E5/FFFFFF?text=NH'); -fx-background-size: cover; -fx-background-position: center;" />
+      
+        <!-- Profile Info -->
+        <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+            <Label text="Nahid Hasan" textFill="#1F2937">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </Label>
+            <Label text="nh@gmail.com" textFill="#6B7280">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+            <HBox spacing="15.0">
+                <HBox alignment="CENTER_LEFT" spacing="5.0">
+                    <Label text="📅" textFill="#6B7280">
+                        <font>
+                            <Font size="12.0" />
+                        </font>
+                    </Label>
+                    <Label text="Joined July 2025" textFill="#6B7280">
+                        <font>
+                            <Font size="12.0" />
+                        </font>
+                    </Label>
+                </HBox>
+                <HBox alignment="CENTER_LEFT" spacing="5.0">
+                    <Label text="✓" textFill="#10B981">
+                        <font>
+                            <Font size="12.0" />
+                        </font>
+                    </Label>
+                    <Label text="Verified Account" textFill="#6B7280">
+                        <font>
+                            <Font size="12.0" />
+                        </font>
+                    </Label>
+                </HBox>
+            </HBox>
+        </VBox>
+      
+        <!-- Edit Profile Button -->
+        <Button text="✏️ Edit Profile" style="-fx-background-color: #1F2937; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8; -fx-padding: 10 20 10 20;">
+            <font>
+                <Font name="System Bold" size="12.0" />
+            </font>
+        </Button>
+    </HBox>
+   
+    <Region prefHeight="25.0" />
+   
+    <!-- Stats Cards -->
+    <HBox spacing="20.0">
+        <!-- Queries Posted Card -->
+        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <Region prefHeight="24.0" prefWidth="24.0"
+                    style="-fx-background-color: #10B981; -fx-background-radius: 12;" />
+  
+            <Label text="📊" style="-fx-font-size: 20px;" />
+
+            <Label text="12" textFill="#1F2937">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+            <Label text="Queries Posted" textFill="#6B7280" textAlignment="CENTER">
+                <font>
+                    <Font size="12.0" />
+                </font>
+            </Label>
+        </VBox>
+      
+        <!-- Recommendations Given Card -->
+        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <Region prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #FEF3C7; -fx-background-radius: 20;"/>
+            
+            <Label text="⭐" textFill="#F59E0B">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </Label>
+              
+  
+            <Label text="48" textFill="#1F2937">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+            <Label text="Recommendations Given" textFill="#6B7280" textAlignment="CENTER">
+                <font>
+                    <Font size="12.0" />
+                </font>
+            </Label>
+        </VBox>
+      
+        <!-- Solved Queries Card -->
+        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <Region prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #D1FAE5; -fx-background-radius: 20;"/>
+                
+            <Label text="✅" textFill="#10B981">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </Label>
+        
+            <Label text="8" textFill="#1F2937">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+            <Label text="Solved Queries" textFill="#6B7280" textAlignment="CENTER">
+                <font>
+                    <Font size="12.0" />
+                </font>
+            </Label>
+        </VBox>
+      
+        <!-- Helpfulness Rating Card -->
+        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </padding>
+            <Region prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F3E8FF; -fx-background-radius: 20;"/>
+              
+            <Label text="📈" textFill="#8B5CF6">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </Label>
+           
+            <Label text="94%" textFill="#1F2937">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+            <Label text="Helpfulness Rating" textFill="#6B7280" textAlignment="CENTER">
+                <font>
+                    <Font size="12.0" />
+                </font>
+            </Label>
+        </VBox>
+    </HBox>
+   
+    <Region prefHeight="25.0" />
+   
+    <!-- Content Area -->
+    <HBox spacing="25.0">
+        <!-- Recent Queries -->
+        <VBox spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+            <Label text="Recent Queries" textFill="#1F2937">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+            <Label text="Your latest product recommendation requests" textFill="#6B7280">
+                <font>
+                    <Font size="12.0" />
+                </font>
+            </Label>
+         
+            <!-- Query Items -->
+            <VBox spacing="15.0">
+                <HBox alignment="CENTER_LEFT" spacing="15.0">
+                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                        <Label text="Best wireless earbuds for running" textFill="#1F2937">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <HBox spacing="10.0">
+                            <Label text="active" textFill="#10B981" style="-fx-background-color: #D1FAE5; -fx-background-radius: 12; -fx-padding: 2 8 2 8;">
+                                <font>
+                                    <Font size="10.0" />
+                                </font>
+                            </Label>
+                            <Label text="15 responses" textFill="#6B7280">
+                                <font>
+                                    <Font size="11.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                    </VBox>
+                </HBox>
+            
+                <HBox alignment="CENTER_LEFT" spacing="15.0">
+                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                        <Label text="Eco-friendly cleaning products" textFill="#1F2937">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <HBox spacing="10.0">
+                            <Label text="solved" textFill="#10B981" style="-fx-background-color: #D1FAE5; -fx-background-radius: 12; -fx-padding: 2 8 2 8;">
+                                <font>
+                                    <Font size="10.0" />
+                                </font>
+                            </Label>
+                            <Label text="8 responses" textFill="#6B7280">
+                                <font>
+                                    <Font size="11.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                    </VBox>
+                </HBox>
+            
+                <HBox alignment="CENTER_LEFT" spacing="15.0">
+                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                        <Label text="Gaming laptop recommendations" textFill="#1F2937">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <HBox spacing="10.0">
+                            <Label text="active" textFill="#10B981" style="-fx-background-color: #D1FAE5; -fx-background-radius: 12; -fx-padding: 2 8 2 8;">
+                                <font>
+                                    <Font size="10.0" />
+                                </font>
+                            </Label>
+                            <Label text="22 responses" textFill="#6B7280">
+                                <font>
+                                    <Font size="11.0" />
+                                </font>
+                            </Label>
+                        </HBox>
+                    </VBox>
+                </HBox>
+            </VBox>
+        </VBox>
+      
+        <!-- Account Settings -->
+        <VBox spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+            <padding>
+                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+            </padding>
+            <Label text="Account Settings" textFill="#1F2937">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+            <Label text="Manage your account preferences" textFill="#6B7280">
+                <font>
+                    <Font size="12.0" />
+                </font>
+            </Label>
+         
+            <!-- Settings Items -->
+            <VBox spacing="20.0">
+                <!-- Email Notifications -->
+                <HBox alignment="CENTER_LEFT" spacing="15.0">
+                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                        <Label text="Email Notifications" textFill="#1F2937">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label text="Receive updates about your queries" textFill="#6B7280">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                    <Region prefHeight="24.0" prefWidth="44.0" style="-fx-background-color: #10B981; -fx-background-radius: 12;"/>
+                        
+                    <HBox alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="44.0">
+                        <padding>
+                            <Insets right="2.0" />
+                        </padding>
+                        <Region prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: white; -fx-background-radius: 10;" />
+                    </HBox>
+                        
+                </HBox>
+            
+                <!-- Public Profile -->
+                <HBox alignment="CENTER_LEFT" spacing="15.0">
+                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                        <Label text="Public Profile" textFill="#1F2937">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label text="Make your profile visible to others" textFill="#6B7280">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                    <Region prefHeight="24.0" prefWidth="44.0" style="-fx-background-color: #10B981; -fx-background-radius: 12;"/>
+               
+                    <HBox alignment="CENTER_RIGHT" prefHeight="24.0" prefWidth="44.0">
+                        <padding>
+                            <Insets right="2.0" />
+                        </padding>
+                        <Region prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: white; -fx-background-radius: 10;" />
+                    </HBox>
+                    
+                </HBox>
+            
+                <!-- Weekly Digest -->
+                <HBox alignment="CENTER_LEFT" spacing="15.0">
+                    <VBox spacing="5.0" HBox.hgrow="ALWAYS">
+                        <Label text="Weekly Digest" textFill="#1F2937">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label text="Get weekly summary of activities" textFill="#6B7280">
+                            <font>
+                                <Font size="12.0" />
+                            </font>
+                        </Label>
+                    </VBox>
+                    <Region prefHeight="24.0" prefWidth="44.0" style="-fx-background-color: #E5E7EB; -fx-background-radius: 12;"/>
+            
+                    <HBox alignment="CENTER_LEFT" prefHeight="24.0" prefWidth="44.0">
+                        <padding>
+                            <Insets left="2.0" />
+                        </padding>
+                        <Region prefHeight="20.0" prefWidth="20.0" style="-fx-background-color: white; -fx-background-radius: 10;" />
+                    </HBox>
+                 
+                </HBox>
+            </VBox>
+         
+            <Region prefHeight="15.0" />
+         
+            <!-- Action Buttons -->
+            <VBox spacing="10.0">
+                <Button alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #F9FAFB; -fx-text-fill: #1F2937; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E5E7EB; -fx-border-width: 1;" text="✉️ Change Email">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #F9FAFB; -fx-text-fill: #1F2937; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E5E7EB; -fx-border-width: 1;" text="🔒 Change Password">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Button>
+                <Button alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #EF4444; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8;" text="🗑️ Delete Account">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Button>
+            </VBox>
+        </VBox>
+    </HBox>
+</VBox>

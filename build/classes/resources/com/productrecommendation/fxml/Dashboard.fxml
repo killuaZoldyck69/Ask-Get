@@ -5,366 +5,351 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.productrecommendation.controllers.DashboardController">
-    <top>
-        <!-- Header Section -->
-        <HBox alignment="CENTER_LEFT" prefHeight="80.0" style="-fx-background-color: #2c3e50; -fx-padding: 10;">
-            <children>
-                <VBox alignment="CENTER_LEFT" spacing="2.0">
-                    <children>
-                        <Label text="Product Recommendation System" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="18.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="welcomeLabel" text="Welcome, User!" textFill="#bdc3c7">
-                            <font>
-                                <Font size="12.0" />
-                            </font>
-                        </Label>
-                    </children>
-                    <HBox.margin>
-                        <Insets left="15.0" />
-                    </HBox.margin>
-                </VBox>
-                <Region HBox.hgrow="ALWAYS" />
-                <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogout" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="Logout">
-                    <HBox.margin>
-                        <Insets right="10.0" />
-                    </HBox.margin>
-                </Button>
-            </children>
-        </HBox>
-    </top>
-    <left>
-        <!-- Sidebar Navigation -->
-        <VBox prefWidth="250.0" style="-fx-background-color: #34495e; -fx-padding: 20;">
-            <children>
-                <Label text="Navigation" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="16.0" />
-                    </font>
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </Label>
-            
-                <!-- My Profile Button -->
-                <Button fx:id="profileButton" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showProfile" prefHeight="45.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: center-left; -fx-background-radius: 5;" text="👤 My Profile">
-                    <VBox.margin>
-                        <Insets bottom="5.0" />
-                    </VBox.margin>
-                </Button>
-            
-                <!-- All Queries Button -->
-                <Button fx:id="allQueriesButton" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showAllQueries" prefHeight="45.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: center-left; -fx-background-radius: 5;" text="📋 All Queries">
-                    <VBox.margin>
-                        <Insets bottom="5.0" />
-                    </VBox.margin>
-                </Button>
-            
-                <!-- My Queries Button -->
-                <Button fx:id="myQueriesButton" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showMyQueries" prefHeight="45.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: center-left; -fx-background-radius: 5;" text="📝 My Queries">
-                    <VBox.margin>
-                        <Insets bottom="5.0" />
-                    </VBox.margin>
-                </Button>
-            
-                <!-- My Recommendations Button -->
-                <Button fx:id="myRecommendationsButton" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showMyRecommendations" prefHeight="45.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: center-left; -fx-background-radius: 5;" text="⭐ My Recommendations">
-                    <VBox.margin>
-                        <Insets bottom="5.0" />
-                    </VBox.margin>
-                </Button>
-            
-                <!-- Recommendations for Me Button -->
-                <Button fx:id="recommendationsForMeButton" alignment="BASELINE_LEFT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#showRecommendationsForMe" prefHeight="45.0" style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-size: 14px; -fx-alignment: center-left; -fx-background-radius: 5;" text="🎯 Recommendations for Me">
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </Button>
-            
-                <Separator style="-fx-background-color: #5a6c7d;">
-                    <VBox.margin>
-                        <Insets bottom="20.0" />
-                    </VBox.margin>
-                </Separator>
-            
-                <!-- Stats Section -->
-                <VBox spacing="10.0" style="-fx-background-color: #2c3e50; -fx-padding: 15; -fx-background-radius: 10;">
-                    <children>
-                        <Label text="Quick Stats" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="totalQueriesLabel" text="Total Queries: 0" textFill="#bdc3c7">
-                            <font>
-                                <Font size="12.0" />
-                            </font>
-                        </Label>
-                        <Label fx:id="totalRecommendationsLabel" text="Recommendations: 0" textFill="#bdc3c7">
-                            <font>
-                                <Font size="12.0" />
-                            </font>
-                        </Label>
-                    </children>
-                </VBox>
-            </children>
-        </VBox>
-    </left>
-    <center>
-        <!-- Main Content Area -->
-        <StackPane fx:id="contentArea" style="-fx-background-color: #ecf0f1; -fx-padding: 20;">
-            <children>
-                <!-- Default Welcome Screen -->
-                <VBox fx:id="welcomeScreen" alignment="CENTER" spacing="30.0">
-                    <children>
-                        <VBox alignment="CENTER" spacing="10.0">
-                            <children>
-                                <Label text="Welcome to Product Recommendation System" textAlignment="CENTER">
-                                    <font>
-                                        <Font name="System Bold" size="24.0" />
-                                    </font>
-                                </Label>
-                                <Label text="Select an option from the navigation menu to get started" textAlignment="CENTER" textFill="#7f8c8d">
-                                    <font>
-                                        <Font size="16.0" />
-                                    </font>
-                                </Label>
-                            </children>
-                        </VBox>
-                        <HBox alignment="CENTER" spacing="20.0">
-                            <children>
-                                <Button onAction="#showProfile" prefHeight="40.0" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-font-size: 14px;" text="View Profile" />
-                                <Button onAction="#showRecommendationsForMe" prefHeight="40.0" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-font-size: 14px;" text="Get Recommendations" />
-                            </children>
-                        </HBox>
-                    </children>
-                </VBox>
-            
-          <!-- Profile Section -->
-<!-- Profile Section -->
-<ScrollPane fx:id="profileSection" fitToWidth="true" visible="false">
-    <content>
-        <VBox spacing="25.0" style="-fx-padding: 30; -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2);">
-            <children>
-                <!-- Profile Header -->
-                <VBox alignment="CENTER" spacing="15.0" style="-fx-padding: 20; -fx-background-color: rgba(255, 255, 255, 0.95); -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 20, 0, 0, 5);">
-                    <children>
-                        <!-- Profile Avatar -->
-                        <Label text="NH" textFill="white" prefWidth="100" prefHeight="100" alignment="CENTER"
-                               style="-fx-font-size: 28; -fx-font-weight: bold; -fx-background-color: linear-gradient(to bottom right, #667eea, #764ba2); -fx-background-radius: 50; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0, 0, 3);" />
-                        
-                        <!-- Profile Name -->
-                        <Label text="Nahid Hasan" textFill="#2c3e50" style="-fx-font-size: 32; -fx-font-weight: bold;" />
-                        
-                        <!-- Profile ID -->
-                        <Label text="ID: 687a74a35f524b60bb1c0faf" textFill="#7f8c8d" 
-                               style="-fx-font-size: 11; -fx-font-family: 'Courier New'; -fx-background-color: #f8f9fa; -fx-padding: 5 10; -fx-background-radius: 15;" />
-                    </children>
-                </VBox>
-                
-                <!-- Profile Details Card -->
-                <VBox spacing="20.0" style="-fx-padding: 25; -fx-background-color: rgba(255, 255, 255, 0.95); -fx-background-radius: 20; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 20, 0, 0, 5);">
-                    <children>
-                        <Label text="Profile Information" textFill="#2c3e50" style="-fx-font-size: 24; -fx-font-weight: bold;" />
-                        
-                        <!-- Profile Fields Grid -->
-                        <GridPane hgap="20.0" vgap="20.0">
-                            <columnConstraints>
-                                <ColumnConstraints minWidth="120.0" />
-                                <ColumnConstraints hgrow="ALWAYS" />
-                            </columnConstraints>
-                            <children>
-                                <!-- Display Name Field -->
-                                <HBox alignment="CENTER_LEFT" spacing="10" GridPane.rowIndex="0" 
-                                      style="-fx-padding: 10; -fx-background-color: rgba(102, 126, 234, 0.1); -fx-background-radius: 10; -fx-border-color: #667eea; -fx-border-radius: 10; -fx-border-width: 0 0 0 3;">
-                                    <children>
-                                        <Label text="📧" style="-fx-font-size: 16;" />
-                                        <Label text="Display Name:" textFill="#34495e" style="-fx-font-weight: bold;" />
-                                    </children>
-                                </HBox>
-                                <TextField fx:id="displayNameField" text="Nahid Hasan" GridPane.columnIndex="1" GridPane.rowIndex="0" 
-                                          style="-fx-padding: 12; -fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 10; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-font-size: 14;" />
-                                
-                                <!-- Email Field -->
-                                <HBox alignment="CENTER_LEFT" spacing="10" GridPane.rowIndex="1" 
-                                      style="-fx-padding: 10; -fx-background-color: rgba(102, 126, 234, 0.1); -fx-background-radius: 10; -fx-border-color: #667eea; -fx-border-radius: 10; -fx-border-width: 0 0 0 3;">
-                                    <children>
-                                        <Label text="✉️" style="-fx-font-size: 16;" />
-                                        <Label text="Email:" textFill="#34495e" style="-fx-font-weight: bold;" />
-                                    </children>
-                                </HBox>
-                                <TextField fx:id="emailField" text="nh@gmail.com" GridPane.columnIndex="1" GridPane.rowIndex="1" 
-                                          style="-fx-padding: 12; -fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 10; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-font-size: 14;" />
-                                
-                                <!-- Password Field -->
-                                <HBox alignment="CENTER_LEFT" spacing="10" GridPane.rowIndex="2" 
-                                      style="-fx-padding: 10; -fx-background-color: rgba(102, 126, 234, 0.1); -fx-background-radius: 10; -fx-border-color: #667eea; -fx-border-radius: 10; -fx-border-width: 0 0 0 3;">
-                                    <children>
-                                        <Label text="🔒" style="-fx-font-size: 16;" />
-                                        <Label text="Password:" textFill="#34495e" style="-fx-font-weight: bold;" />
-                                    </children>
-                                </HBox>
-                                <PasswordField fx:id="passwordField" text="123456" GridPane.columnIndex="1" GridPane.rowIndex="2" 
-                                              style="-fx-padding: 12; -fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 10; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-font-size: 14;" />
-                                
-                                <!-- Phone Field -->
-                                <HBox alignment="CENTER_LEFT" spacing="10" GridPane.rowIndex="3" 
-                                      style="-fx-padding: 10; -fx-background-color: rgba(102, 126, 234, 0.1); -fx-background-radius: 10; -fx-border-color: #667eea; -fx-border-radius: 10; -fx-border-width: 0 0 0 3;">
-                                    <children>
-                                        <Label text="📱" style="-fx-font-size: 16;" />
-                                        <Label text="Phone:" textFill="#34495e" style="-fx-font-weight: bold;" />
-                                    </children>
-                                </HBox>
-                                <TextField fx:id="phoneField" promptText="Enter phone number" GridPane.columnIndex="1" GridPane.rowIndex="3" 
-                                          style="-fx-padding: 12; -fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 10; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-font-size: 14;" />
-                                
-                                <!-- Registration Date Field -->
-                                <HBox alignment="CENTER_LEFT" spacing="10" GridPane.rowIndex="4" 
-                                      style="-fx-padding: 10; -fx-background-color: rgba(102, 126, 234, 0.1); -fx-background-radius: 10; -fx-border-color: #667eea; -fx-border-radius: 10; -fx-border-width: 0 0 0 3;">
-                                    <children>
-                                        <Label text="📅" style="-fx-font-size: 16;" />
-                                        <Label text="Registered:" textFill="#34495e" style="-fx-font-weight: bold;" />
-                                    </children>
-                                </HBox>
-                                <TextField fx:id="registrationField" text="July 18, 2025" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" 
-                                          style="-fx-padding: 12; -fx-background-color: rgba(248, 249, 250, 0.9); -fx-background-radius: 10; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-font-size: 14; -fx-opacity: 0.8;" />
-                                
-                                <!-- Bio Field -->
-                                <HBox alignment="CENTER_LEFT" spacing="10" GridPane.rowIndex="5" 
-                                      style="-fx-padding: 10; -fx-background-color: rgba(102, 126, 234, 0.1); -fx-background-radius: 10; -fx-border-color: #667eea; -fx-border-radius: 10; -fx-border-width: 0 0 0 3;">
-                                    <children>
-                                        <Label text="📝" style="-fx-font-size: 16;" />
-                                        <Label text="Bio:" textFill="#34495e" style="-fx-font-weight: bold;" />
-                                    </children>
-                                </HBox>
-                                <TextArea fx:id="bioArea" promptText="Tell us about yourself..." GridPane.columnIndex="1" GridPane.rowIndex="5" 
-                                         prefRowCount="3" wrapText="true" 
-                                         style="-fx-padding: 12; -fx-background-color: rgba(255, 255, 255, 0.9); -fx-background-radius: 10; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-font-size: 14;" />
-                            </children>
-                        </GridPane>
-                    </children>
-                </VBox>
-                
-                <!-- Status Badge -->
-                <HBox alignment="CENTER" spacing="10">
-                    <children>
-                        <Label text="✅ Active User" textFill="white" 
-                               style="-fx-background-color: linear-gradient(to right, #2ecc71, #27ae60); -fx-padding: 10 20; -fx-background-radius: 25; -fx-font-size: 14; -fx-font-weight: bold;" />
-                    </children>
-                </HBox>
-                
-                <!-- Action Buttons -->
-                <HBox spacing="15" alignment="CENTER" style="-fx-padding: 20;">
-                    <children>
-                        <Button text="💾 Save Changes" onAction="#saveProfile" prefWidth="150" prefHeight="45"
-                                style="-fx-background-color: linear-gradient(to right, #27ae60, #2ecc71); -fx-text-fill: white; -fx-background-radius: 25; -fx-font-size: 14; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 2);" />
-                        <Button text="❌ Cancel" onAction="#cancelProfileEdit" prefWidth="150" prefHeight="45"
-                                style="-fx-background-color: linear-gradient(to right, #95a5a6, #7f8c8d); -fx-text-fill: white; -fx-background-radius: 25; -fx-font-size: 14; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 2);" />
-                        <Button text="🔄 Reset" onAction="#resetProfile" prefWidth="150" prefHeight="45"
-                                style="-fx-background-color: linear-gradient(to right, #3498db, #2980b9); -fx-text-fill: white; -fx-background-radius: 25; -fx-font-size: 14; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 10, 0, 0, 2);" />
-                    </children>
-                </HBox>
-            </children>
-        </VBox>
-    </content>
-</ScrollPane>
+<BorderPane fx:id="mainBorderPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.productrecommendation.controllers.DashboardController">
+   <top>
+      <!-- Top Navigation Bar -->
+      <HBox alignment="CENTER_LEFT" prefHeight="60.0" spacing="20.0" style="-fx-background-color: #ffffff; -fx-border-color: #e5e7eb; -fx-border-width: 0 0 1 0;">
+         <padding>
+            <Insets left="20.0" right="20.0" />
+         </padding>
+         <HBox alignment="CENTER_LEFT" spacing="10.0">
+            <Region prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: #4F46E5; -fx-background-radius: 8;" />
+            <VBox>
+               <Label text="Ask&amp;Get" textFill="#1F2937">
+                  <font>
+                     <Font name="System Bold" size="16.0" />
+                  </font>
+               </Label>
+               <Label text="Product Recommendation System" textFill="#6B7280">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Label>
+            </VBox>
+         </HBox>
+         <Region HBox.hgrow="ALWAYS" />
+         <TextField fx:id="searchField" promptText="Search queries..." prefWidth="300.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onAction="#handleSearch" />
+         <Region prefWidth="20.0" />
+         <Button fx:id="notificationBtn" text="🔔" style="-fx-background-color: transparent; -fx-border-color: transparent;" onAction="#handleNotification" />
+         <Button fx:id="settingsBtn" text="⚙️" style="-fx-background-color: transparent; -fx-border-color: transparent;" onAction="#handleSettings" />
+         <VBox alignment="CENTER_RIGHT">
+            <Label fx:id="welcomeLabel" text="Welcome back!" textFill="#1F2937">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="userLabel" text="User" textFill="#6B7280">
+               <font>
+                  <Font size="11.0" />
+               </font>
+            </Label>
+         </VBox>
+         <Button fx:id="logoutBtn" text="↗️ Logout" style="-fx-background-color: #EF4444; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8;" onAction="#handleLogout" />
+      </HBox>
+   </top>
 
-            
-                <!-- All Queries Section -->
-                <ScrollPane fx:id="allQueriesSection" fitToWidth="true" style="-fx-background-color: transparent;" visible="true">
-                    <content>
-                        <FlowPane fx:id="queryCardContainer"
-                                  hgap="20.0"
-                                  vgap="20.0"
-                                  prefWrapLength="800">
-                            <padding>
-                                <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
-                            </padding>
-                        </FlowPane>
-                    </content>
-                </ScrollPane>
+   <left>
+      <!-- Sidebar -->
+      <VBox prefWidth="250.0" style="-fx-background-color: #ffffff; -fx-border-color: #e5e7eb; -fx-border-width: 0 1 0 0;">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+         
+         <!-- Navigation Items -->
+         <VBox spacing="8.0">
+            <Button fx:id="dashboardBtn" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: #4F46E5; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8;" text="📊 Dashboard" onAction="#handleDashboard">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="profileBtn" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: transparent; -fx-text-fill: #6B7280; -fx-background-radius: 8;" text="👤 My Profile" onAction="#handleProfile">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="allQueriesBtn" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: transparent; -fx-text-fill: #6B7280; -fx-background-radius: 8;" text="📝 All Queries" onAction="#handleAllQueries">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="myQueriesBtn" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: transparent; -fx-text-fill: #6B7280; -fx-background-radius: 8;" text="💬 My Queries" onAction="#handleMyQueries">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="myRecommendationsBtn" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: transparent; -fx-text-fill: #6B7280; -fx-background-radius: 8;" text="⭐ My Recommendations" onAction="#handleMyRecommendations">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="recommendationsForMeBtn" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="40.0" style="-fx-background-color: transparent; -fx-text-fill: #6B7280; -fx-background-radius: 8;" text="🎯 Recommendations for Me" onAction="#handleRecommendationsForMe">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+         </VBox>
+         
+         <Region VBox.vgrow="ALWAYS" />
+         
+         <!-- Quick Stats -->
+         <VBox spacing="15.0">
+            <Label text="QUICK STATS" textFill="#6B7280">
+               <font>
+                  <Font name="System Bold" size="11.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER_LEFT">
+               <Label text="Total Queries" textFill="#6B7280">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Label>
+               <Region HBox.hgrow="ALWAYS" />
+               <Label fx:id="totalQueriesLabel" text="24" textFill="#1F2937">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <Label text="Recommendations" textFill="#6B7280">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Label>
+               <Region HBox.hgrow="ALWAYS" />
+               <Label fx:id="recommendationsLabel" text="18" textFill="#1F2937">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+            </HBox>
+            <HBox alignment="CENTER_LEFT">
+               <Label text="This Week" textFill="#6B7280">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Label>
+               <Region HBox.hgrow="ALWAYS" />
+               <Label fx:id="thisWeekLabel" text="+12" textFill="#10B981">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+               </Label>
+            </HBox>
+         </VBox>
+      </VBox>
+   </left>
 
-
+   <center>
+      <!-- Main Content Area -->
+      <VBox style="-fx-background-color: #F9FAFB;">
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+         
+         <!-- Welcome Banner -->
+         <HBox alignment="CENTER_LEFT" prefHeight="120.0" style="-fx-background-color: linear-gradient(to right, #4F46E5, #7C3AED); -fx-background-radius: 12;">
+            <padding>
+               <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
+            </padding>
+            <VBox spacing="8.0">
+               <Label fx:id="greetingLabel" text="Good morning! 👋" textFill="white">
+                  <font>
+                     <Font name="System Bold" size="24.0" />
+                  </font>
+               </Label>
+               <Label text="Ready to discover amazing product recommendations today?" textFill="white">
+                  <font>
+                     <Font size="16.0" />
+                  </font>
+               </Label>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="newQueryBtn" text="+ New Query" style="-fx-background-color: white; -fx-text-fill: #4F46E5; -fx-background-radius: 8; -fx-border-radius: 8;" onAction="#handleNewQuery">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </HBox>
+         
+         <Region prefHeight="30.0" />
+         
+         <!-- Metrics Cards -->
+         <HBox spacing="20.0">
+            <!-- Total Queries Card -->
+            <VBox spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="Total Queries" textFill="#6B7280">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Label>
+               <HBox alignment="CENTER_LEFT" spacing="10.0">
+                  <Label fx:id="totalQueriesCardLabel" text="24" textFill="#1F2937">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label text="📊" textFill="#4F46E5">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </HBox>
+               <Label fx:id="totalQueriesChangeLabel" text="+12% from last week" textFill="#10B981">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Label>
+            </VBox>
             
-                <!-- My Queries Section -->
-                <VBox fx:id="myQueriesSection" spacing="20.0" style="-fx-padding: 20;" visible="false">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="20.0">
-                            <children>
-                                <Label text="My Queries" textFill="#2c3e50">
-                                    <font>
-                                        <Font name="System Bold" size="28.0" />
-                                    </font>
-                                </Label>
-                                <Region HBox.hgrow="ALWAYS" />
-                                <Button onAction="#createNewQuery" style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="+ New Query" />
-                            </children>
-                        </HBox>
-                        <TableView fx:id="myQueriesTable" prefHeight="400.0">
-                            <columns>
-                                <TableColumn fx:id="myQueryIdColumn" prefWidth="80.0" text="ID" />
-                                <TableColumn fx:id="myQueryTextColumn" prefWidth="350.0" text="Query" />
-                                <TableColumn fx:id="myQueryDateColumn" prefWidth="150.0" text="Date" />
-                                <TableColumn fx:id="myQueryStatusColumn" prefWidth="100.0" text="Status" />
-                                <TableColumn fx:id="myQueryActionsColumn" prefWidth="120.0" text="Actions" />
-                            </columns>
-                        </TableView>
-                    </children>
-                </VBox>
+            <!-- My Recommendations Card -->
+            <VBox spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="My Recommendations" textFill="#6B7280">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Label>
+               <HBox alignment="CENTER_LEFT" spacing="10.0">
+                  <Label fx:id="myRecommendationsCardLabel" text="18" textFill="#1F2937">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label text="⭐" textFill="#F59E0B">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </HBox>
+               <Label fx:id="myRecommendationsChangeLabel" text="+8% from last week" textFill="#10B981">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Label>
+            </VBox>
             
-                <!-- My Recommendations Section -->
-                <VBox fx:id="myRecommendationsSection" spacing="20.0" style="-fx-padding: 20;" visible="false">
-                    <children>
-                        <Label text="My Recommendations" textFill="#2c3e50">
-                            <font>
-                                <Font name="System Bold" size="28.0" />
-                            </font>
-                        </Label>
-                        <ScrollPane fitToWidth="true" prefHeight="400.0">
-                            <content>
-                                <VBox fx:id="myRecommendationsContainer" spacing="10.0" style="-fx-padding: 10;" />
-                            </content>
-                        </ScrollPane>
-                    </children>
-                </VBox>
+            <!-- Active Users Card -->
+            <VBox spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="Active Users" textFill="#6B7280">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Label>
+               <HBox alignment="CENTER_LEFT" spacing="10.0">
+                  <Label fx:id="activeUsersCardLabel" text="1.2k" textFill="#1F2937">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label text="👥" textFill="#10B981">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </HBox>
+               <Label fx:id="activeUsersChangeLabel" text="+23% from last week" textFill="#10B981">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Label>
+            </VBox>
             
-                <!-- Recommendations for Me Section -->
-                <VBox fx:id="recommendationsForMeSection" spacing="20.0" style="-fx-padding: 20;" visible="false">
-                    <children>
-                        <HBox alignment="CENTER_LEFT" spacing="20.0">
-                            <children>
-                                <Label text="Recommendations for Me" textFill="#2c3e50">
-                                    <font>
-                                        <Font name="System Bold" size="28.0" />
-                                    </font>
-                                </Label>
-                                <Region HBox.hgrow="ALWAYS" />
-                                <Button onAction="#refreshRecommendations" style="-fx-background-color: #e67e22; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5;" text="Refresh" />
-                            </children>
-                        </HBox>
-                        <ScrollPane fitToWidth="true" prefHeight="400.0">
-                            <content>
-                                <VBox fx:id="recommendationsForMeContainer" spacing="10.0" style="-fx-padding: 10;" />
-                            </content>
-                        </ScrollPane>
-                    </children>
-                </VBox>
-            </children>
-        </StackPane>
-    </center>
-    <bottom>
-        <!-- Footer -->
-        <HBox alignment="CENTER" prefHeight="40.0" style="-fx-background-color: #34495e; -fx-padding: 10;">
-            <children>
-                <Label text="© 2025 Product Recommendation System. All rights reserved." textFill="#bdc3c7">
-                    <font>
-                        <Font size="12.0" />
-                    </font>
-                </Label>
-            </children>
-        </HBox>
-    </bottom>
+            <!-- Engagement Rate Card -->
+            <VBox spacing="10.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <Label text="Engagement Rate" textFill="#6B7280">
+                  <font>
+                     <Font size="14.0" />
+                  </font>
+               </Label>
+               <HBox alignment="CENTER_LEFT" spacing="10.0">
+                  <Label fx:id="engagementRateCardLabel" text="89%" textFill="#1F2937">
+                     <font>
+                        <Font name="System Bold" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label text="📈" textFill="#8B5CF6">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+               </HBox>
+               <Label fx:id="engagementRateChangeLabel" text="+5% from last week" textFill="#10B981">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Label>
+            </VBox>
+         </HBox>
+         
+         <Region prefHeight="30.0" />
+         
+         <!-- Recent Queries and Trending Categories -->
+         <HBox spacing="30.0">
+            <!-- Recent Queries -->
+            <VBox fx:id="recentQueriesBox" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+               <HBox alignment="CENTER_LEFT">
+                  <Label text="Recent Queries" textFill="#1F2937">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Region HBox.hgrow="ALWAYS" />
+                  <Button fx:id="recentQueriesSettingsBtn" text="⚙️" style="-fx-background-color: transparent; -fx-border-color: transparent;" textFill="#6B7280" onAction="#handleRecentQueriesSettings">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Button>
+               </HBox>
+               <Label text="Latest product recommendation requests" textFill="#6B7280">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Label>
+               
+               <!-- Query Items Container -->
+               <VBox fx:id="queryItemsContainer" spacing="15.0">
+                  <!-- Query items will be populated by the controller -->
+               </VBox>
+            </VBox>
+            
+            <!-- Trending Categories -->
+            <VBox fx:id="trendingCategoriesBox" spacing="20.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+               </padding>
+               <Label text="Trending Categories" textFill="#1F2937">
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font>
+               </Label>
+               <Label text="Most popular product categories this week" textFill="#6B7280">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Label>
+               
+               <!-- Category Items Container -->
+               <VBox fx:id="categoryItemsContainer" spacing="15.0">
+                  <!-- Category items will be populated by the controller -->
+               </VBox>
+            </VBox>
+         </HBox>
+      </VBox>
+   </center>
 </BorderPane>
