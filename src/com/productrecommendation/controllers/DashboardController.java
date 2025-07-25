@@ -130,6 +130,11 @@ public class DashboardController implements Initializable {
         activeButton.setStyle("-fx-background-color: #4F46E5; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8;");
     }
 
+    public void showMainDashboard() {
+        mainBorderPane.setCenter(originalDashboardContent);
+        updateNavigationButtons(dashboardBtn);
+    }
+
     @FXML
     private void handleSearch(ActionEvent event) {
         // Implementation for search functionality

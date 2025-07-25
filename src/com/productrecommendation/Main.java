@@ -1,5 +1,6 @@
 package com.productrecommendation;
 
+import com.productrecommendation.models.MongoDBConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +12,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+            MongoDBConnection.connect();
             // Load the Login.fxml file from resources
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/com/productrecommendation/fxml/Login.fxml"));
 
