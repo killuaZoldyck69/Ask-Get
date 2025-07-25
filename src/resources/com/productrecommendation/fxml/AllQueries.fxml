@@ -5,7 +5,98 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
     
-</AnchorPane>
+
+<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.productrecommendation.controllers.AllQueriesController">
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+   
+    <!-- Header Section -->
+    <VBox spacing="20.0">
+        <HBox alignment="CENTER_LEFT" spacing="20.0">
+            <VBox spacing="5.0">
+                <Label text="All Queries" textFill="#1F2937">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Label>
+                <Label text="Browse all product recommendation queries from the community" textFill="#6B7280">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </VBox>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="refreshBtn" text="🔄 Refresh" style="-fx-background-color: #4F46E5; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8;" onAction="#handleRefresh">
+                <font>
+                    <Font name="System Bold" size="14.0" />
+                </font>
+            </Button>
+        </HBox>
+      
+        <!-- Search and Filter Section -->
+        <HBox alignment="CENTER_LEFT" spacing="15.0">
+            <TextField fx:id="searchField" promptText="Search queries..." prefWidth="300.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onKeyReleased="#handleSearch" />
+            <ComboBox fx:id="categoryFilter" promptText="All Categories" prefWidth="150.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onAction="#handleCategoryFilter" />
+            <ComboBox fx:id="sortComboBox" prefWidth="120.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onAction="#handleSort" />
+            <Region HBox.hgrow="ALWAYS" />
+            <Label fx:id="totalQueriesLabel" text="Total: 0 queries" textFill="#6B7280">
+                <font>
+                    <Font size="12.0" />
+                </font>
+            </Label>
+        </HBox>
+    </VBox>
+   
+    <Region prefHeight="20.0" />
+   
+    <!-- Queries List Section -->
+    <VBox spacing="15.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" VBox.vgrow="ALWAYS">
+        <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+        </padding>
+      
+        <!-- Loading indicator -->
+        <StackPane fx:id="loadingPane" style="-fx-background-color: transparent;">
+            <VBox alignment="CENTER" spacing="10.0">
+                <ProgressIndicator fx:id="loadingIndicator" prefHeight="50.0" prefWidth="50.0" />
+                <Label text="Loading queries..." textFill="#6B7280">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </VBox>
+        </StackPane>
+      
+        <!-- Queries Container -->
+        <ScrollPane fx:id="queriesScrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" style="-fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+            <VBox fx:id="queriesContainer" spacing="15.0" />
+        </ScrollPane>
+      
+        <!-- Empty State -->
+        <VBox fx:id="emptyStatePane" alignment="CENTER" spacing="15.0" visible="false">
+            <Label text="📝" textFill="#6B7280">
+                <font>
+                    <Font size="48.0" />
+                </font>
+            </Label>
+            <Label text="No queries found" textFill="#6B7280">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Label>
+            <Label text="Try adjusting your search criteria or refresh the page" textFill="#6B7280">
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </Label>
+        </VBox>
+    </VBox>
+</VBox>
+    

@@ -26,16 +26,19 @@
         </padding>
       
         <!-- Profile Image -->
-        <Region prefHeight="80.0" prefWidth="80.0" style="-fx-background-color: #4F46E5; -fx-background-radius: 40; -fx-background-image: url('https://via.placeholder.com/80x80/4F46E5/FFFFFF?text=NH'); -fx-background-size: cover; -fx-background-position: center;" />
+        <Region fx:id="profileImageRegion"
+                prefHeight="80.0" prefWidth="80.0"
+                style="-fx-background-color: #4F46E5; -fx-background-radius: 40;"
+        />
       
         <!-- Profile Info -->
         <VBox spacing="8.0" HBox.hgrow="ALWAYS">
-            <Label text="Nahid Hasan" textFill="#1F2937">
+            <Label fx:id="nameLabel" text="Nahid Hasan" textFill="#1F2937">
                 <font>
                     <Font name="System Bold" size="24.0" />
                 </font>
             </Label>
-            <Label text="nh@gmail.com" textFill="#6B7280">
+            <Label fx:id="emailLabel" text="nh@gmail.com" textFill="#6B7280">
                 <font>
                     <Font size="14.0" />
                 </font>
@@ -47,7 +50,7 @@
                             <Font size="12.0" />
                         </font>
                     </Label>
-                    <Label text="Joined July 2025" textFill="#6B7280">
+                    <Label fx:id="joinDateLabel" text="Joined July 2025" textFill="#6B7280">
                         <font>
                             <Font size="12.0" />
                         </font>
@@ -67,6 +70,7 @@
                 </HBox>
             </HBox>
         </VBox>
+
       
         <!-- Edit Profile Button -->
         <Button text="✏️ Edit Profile" style="-fx-background-color: #1F2937; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8; -fx-padding: 10 20 10 20;">
@@ -79,103 +83,49 @@
     <Region prefHeight="25.0" />
    
     <!-- Stats Cards -->
-    <HBox spacing="20.0">
-        <!-- Queries Posted Card -->
-        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
-            <Region prefHeight="24.0" prefWidth="24.0"
-                    style="-fx-background-color: #10B981; -fx-background-radius: 12;" />
-  
-            <Label text="📊" style="-fx-font-size: 20px;" />
+    <HBox spacing="20.0" alignment="CENTER">
+        <!-- Queries Posted -->
+        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: #F9FAFB; -fx-background-radius: 8px; -fx-padding: 20;">
+            <Label text="📝" style="-fx-font-size: 24px;" />
+            <Label fx:id="queriesPostedLabel" text="0" textFill="#1F2937">
+                <font>
+                    <Font name="System Bold" size="28.0" />
+                </font>
+            </Label>
+            <Label text="Queries Posted" textFill="#6B7280" />
+        </VBox>
 
-            <Label text="12" textFill="#1F2937">
+        <!-- Recommendations Given -->
+        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: #F9FAFB; -fx-background-radius: 8px; -fx-padding: 20;">
+            <Label text="💡" style="-fx-font-size: 24px;" />
+            <Label fx:id="recommendationsGivenLabel" text="0" textFill="#1F2937">
                 <font>
                     <Font name="System Bold" size="28.0" />
                 </font>
             </Label>
-            <Label text="Queries Posted" textFill="#6B7280" textAlignment="CENTER">
-                <font>
-                    <Font size="12.0" />
-                </font>
-            </Label>
+            <Label text="Recommendations" textFill="#6B7280" />
         </VBox>
-      
-        <!-- Recommendations Given Card -->
-        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
-            <Region prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #FEF3C7; -fx-background-radius: 20;"/>
-            
-            <Label text="⭐" textFill="#F59E0B">
-                <font>
-                    <Font size="20.0" />
-                </font>
-            </Label>
-              
-  
-            <Label text="48" textFill="#1F2937">
+
+        <!-- Solved Queries -->
+        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: #F9FAFB; -fx-background-radius: 8px; -fx-padding: 20;">
+            <Label text="✅" style="-fx-font-size: 24px;" />
+            <Label fx:id="solvedQueriesLabel" text="0" textFill="#1F2937">
                 <font>
                     <Font name="System Bold" size="28.0" />
                 </font>
             </Label>
-            <Label text="Recommendations Given" textFill="#6B7280" textAlignment="CENTER">
-                <font>
-                    <Font size="12.0" />
-                </font>
-            </Label>
+            <Label text="Solved Queries" textFill="#6B7280" />
         </VBox>
-      
-        <!-- Solved Queries Card -->
-        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
-            <Region prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #D1FAE5; -fx-background-radius: 20;"/>
-                
-            <Label text="✅" textFill="#10B981">
-                <font>
-                    <Font size="20.0" />
-                </font>
-            </Label>
-        
-            <Label text="8" textFill="#1F2937">
+
+        <!-- Helpfulness Rating -->
+        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: #F9FAFB; -fx-background-radius: 8px; -fx-padding: 20;">
+            <Label text="📈" style="-fx-font-size: 24px;" />
+            <Label fx:id="helpfulnessRatingLabel" text="0%" textFill="#1F2937">
                 <font>
                     <Font name="System Bold" size="28.0" />
                 </font>
             </Label>
-            <Label text="Solved Queries" textFill="#6B7280" textAlignment="CENTER">
-                <font>
-                    <Font size="12.0" />
-                </font>
-            </Label>
-        </VBox>
-      
-        <!-- Helpfulness Rating Card -->
-        <VBox alignment="CENTER" spacing="8.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);" HBox.hgrow="ALWAYS">
-            <padding>
-                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-            </padding>
-            <Region prefHeight="40.0" prefWidth="40.0" style="-fx-background-color: #F3E8FF; -fx-background-radius: 20;"/>
-              
-            <Label text="📈" textFill="#8B5CF6">
-                <font>
-                    <Font size="20.0" />
-                </font>
-            </Label>
-           
-            <Label text="94%" textFill="#1F2937">
-                <font>
-                    <Font name="System Bold" size="28.0" />
-                </font>
-            </Label>
-            <Label text="Helpfulness Rating" textFill="#6B7280" textAlignment="CENTER">
-                <font>
-                    <Font size="12.0" />
-                </font>
-            </Label>
+            <Label text="Helpfulness" textFill="#6B7280" />
         </VBox>
     </HBox>
    

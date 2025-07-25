@@ -19,8 +19,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.bson.Document;
 
-
-
 /**
  *
  * @author Tasin Ahmed
@@ -40,48 +38,50 @@ public class RegistrationController {
     private void onForgotPassword(ActionEvent event) {
     }
 
-@FXML
+ @FXML
 private void onSignUpButtonClicked(ActionEvent event) {
     String displayName = displayNameField.getText();
     String photoUrl = photoUrlField.getText();
     String email = emailField.getText();
     String password = passwordField.getText();
 
-    // Basic validation
     if (displayName.isEmpty() || email.isEmpty() || password.isEmpty()) {
         System.out.println("All required fields must be filled.");
         return;
     }
 
-    // Create a user document
+    // Current system time as join date string (optional formatting)
+    String joinDate = java.time.LocalDate.now().toString(); // e.g., "2025-07-25"
+
+    // Create user document with fields used in MyProfileController
     Document userDoc = new Document()
             .append("display_name", displayName)
             .append("photo_url", photoUrl)
             .append("email", email)
-            .append("password", password) // ⚠️ For security, hash passwords in production
-            .append("registered_at", System.currentTimeMillis());
+            .append("password", password) // ⚠️ Hash in real apps
+            .append("joinDate", joinDate) // 👈 This must match .getString("joinDate")
+            .append("queriesPosted", 0)
+            .append("recommendationsGiven", 0)
+            .append("solvedQueries", 0)
+            .append("helpfulnessRating", 0); // % shown in profile
 
     try {
-        // Connect to MongoDB
         MongoDBConnection.connect();
         MongoDatabase db = MongoDBConnection.getDatabase();
         MongoCollection<Document> usersCollection = db.getCollection("users");
 
-        // Optional: Check if email already exists
         Document existingUser = usersCollection.find(new Document("email", email)).first();
         if (existingUser != null) {
             System.out.println("Email already registered!");
             return;
         }
 
-        // Insert user
         usersCollection.insertOne(userDoc);
         System.out.println("User registered successfully.");
 
-        // Redirect to Login screen
+        // Redirect to login
         Parent loginRoot = FXMLLoader.load(getClass().getResource("/com/productrecommendation/fxml/Login.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
         boolean isMaximized = stage.isMaximized();
         stage.setScene(new Scene(loginRoot));
         stage.setMaximized(isMaximized);
