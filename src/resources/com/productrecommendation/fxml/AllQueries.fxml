@@ -10,8 +10,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-    
-
 <VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.productrecommendation.controllers.AllQueriesController">
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
@@ -45,6 +43,7 @@
             <TextField fx:id="searchField" promptText="Search queries..." prefWidth="300.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onKeyReleased="#handleSearch" />
             <ComboBox fx:id="categoryFilter" promptText="All Categories" prefWidth="150.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onAction="#handleCategoryFilter" />
             <ComboBox fx:id="sortComboBox" prefWidth="120.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onAction="#handleSort" />
+            <ComboBox fx:id="statusFilter" promptText="All Status" prefWidth="120.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onAction="#handleStatusFilter" />
             <Region HBox.hgrow="ALWAYS" />
             <Label fx:id="totalQueriesLabel" text="Total: 0 queries" textFill="#6B7280">
                 <font>
@@ -99,4 +98,3 @@
         </VBox>
     </VBox>
 </VBox>
-    

@@ -11,6 +11,7 @@ import com.productrecommendation.models.MongoDBConnection;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -41,6 +42,8 @@ public class AllQueriesController implements Initializable {
     @FXML
     private ComboBox<String> sortComboBox;
     @FXML
+    private ComboBox<String> statusFilter;
+    @FXML
     private Label totalQueriesLabel;
     @FXML
     private StackPane loadingPane;
@@ -70,14 +73,23 @@ public class AllQueriesController implements Initializable {
         sortComboBox.getItems().addAll(
             "Newest First",
             "Oldest First",
-            "Most Popular",
-            "Category A-Z"
+            "Most Recommendations",
+            "Category A-Z",
+            "Most Popular"
         );
         sortComboBox.setValue("Newest First");
         
         // Setup category filter
         categoryFilter.getItems().add("All Categories");
         categoryFilter.setValue("All Categories");
+        
+        // Setup status filter
+        statusFilter.getItems().addAll(
+            "All Status",
+            "Solved",
+            "Unsolved"
+        );
+        statusFilter.setValue("All Status");
     }
 
     private void loadQueries() {
@@ -161,7 +173,7 @@ public class AllQueriesController implements Initializable {
         card.setStyle("-fx-background-color: #F8F9FA; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E5E7EB; -fx-border-width: 1;");
         card.setPadding(new Insets(20));
         
-        // Header with title and query type
+        // Header with title and solved status
         HBox header = new HBox(10);
         header.setAlignment(Pos.CENTER_LEFT);
         
@@ -171,6 +183,16 @@ public class AllQueriesController implements Initializable {
         
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
+        
+        // Solved Status Badge
+        Boolean solved = query.getBoolean("solved");
+        if (solved != null) {
+            String statusText = solved ? "✅ Solved" : "❓ Unsolved";
+            String statusColor = solved ? "#10B981" : "#F59E0B";
+            Label statusLabel = new Label(statusText);
+            statusLabel.setStyle("-fx-background-color: " + statusColor + "; -fx-text-fill: white; -fx-background-radius: 12; -fx-font-size: 10px; -fx-padding: 3 8 3 8;");
+            header.getChildren().add(statusLabel);
+        }
         
         // Query Type Badge
         String queryType = query.getString("queryType");
@@ -191,7 +213,54 @@ public class AllQueriesController implements Initializable {
             card.getChildren().add(descLabel);
         }
         
-        // Tags and metadata row 1
+        // User info row
+        HBox userInfo = new HBox(15);
+        userInfo.setAlignment(Pos.CENTER_LEFT);
+        
+        // User name and email
+        String userName = query.getString("userName");
+        String userEmail = query.getString("userEmail");
+        if (userName != null && !userName.trim().isEmpty()) {
+            Label userLabel = new Label("👤 " + userName);
+            userLabel.setStyle("-fx-text-fill: #374151; -fx-font-size: 12px; -fx-font-weight: bold;");
+            userInfo.getChildren().add(userLabel);
+            
+            if (userEmail != null && !userEmail.trim().isEmpty()) {
+                Label emailLabel = new Label("(" + userEmail + ")");
+                emailLabel.setStyle("-fx-text-fill: #6B7280; -fx-font-size: 11px;");
+                userInfo.getChildren().add(emailLabel);
+            }
+        }
+        
+        // Submission date
+        String submissionDate = query.getString("submissionDate");
+        if (submissionDate != null && !submissionDate.trim().isEmpty()) {
+            Label dateLabel = new Label("📅 " + formatTimestamp(submissionDate));
+            dateLabel.setStyle("-fx-text-fill: #6B7280; -fx-font-size: 11px;");
+            userInfo.getChildren().add(dateLabel);
+        }
+        
+        // Total recommendations
+        Object totalRecommendations = query.get("totalRecommendations");
+        if (totalRecommendations != null) {
+            int recCount = 0;
+            if (totalRecommendations instanceof Integer) {
+                recCount = (Integer) totalRecommendations;
+            } else if (totalRecommendations instanceof String) {
+                try {
+                    recCount = Integer.parseInt((String) totalRecommendations);
+                } catch (NumberFormatException e) {
+                    recCount = 0;
+                }
+            }
+            
+            Label recLabel = new Label("💡 " + recCount + " recommendations");
+            String recColor = recCount > 0 ? "#059669" : "#6B7280";
+            recLabel.setStyle("-fx-text-fill: " + recColor + "; -fx-font-size: 11px;");
+            userInfo.getChildren().add(recLabel);
+        }
+        
+        // Tags and metadata row
         HBox metaInfo1 = new HBox(15);
         metaInfo1.setAlignment(Pos.CENTER_LEFT);
         
@@ -224,7 +293,7 @@ public class AllQueriesController implements Initializable {
             metaInfo1.getChildren().add(visibilityLabel);
         }
         
-        // Budget info row 2 (if available)
+        // Budget info row (if available)
         HBox metaInfo2 = new HBox(15);
         metaInfo2.setAlignment(Pos.CENTER_LEFT);
         
@@ -274,7 +343,11 @@ public class AllQueriesController implements Initializable {
             metaInfo2.getChildren().add(timelineLabel);
         }
         
-        card.getChildren().addAll(header, metaInfo1);
+        card.getChildren().addAll(header);
+        if (!userInfo.getChildren().isEmpty()) {
+            card.getChildren().add(userInfo);
+        }
+        card.getChildren().add(metaInfo1);
         if (!metaInfo2.getChildren().isEmpty()) {
             card.getChildren().add(metaInfo2);
         }
@@ -314,15 +387,28 @@ public class AllQueriesController implements Initializable {
         }
         
         try {
-            // If timestamp is in ISO format, parse it
-            if (timestamp.contains("T")) {
-                LocalDateTime dateTime = LocalDateTime.parse(timestamp.replace("Z", ""));
-                return dateTime.format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm"));
-            } else {
-                return timestamp; // Return as is if not in expected format
+            // Try different date formats
+            DateTimeFormatter[] formatters = {
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"),
+                DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss"),
+                DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss")
+            };
+            
+            for (DateTimeFormatter formatter : formatters) {
+                try {
+                    LocalDateTime dateTime = LocalDateTime.parse(timestamp, formatter);
+                    return dateTime.format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm"));
+                } catch (DateTimeParseException e) {
+                    // Try next formatter
+                }
             }
+            
+            // If no formatter works, return as is
+            return timestamp;
         } catch (Exception e) {
-            return timestamp; // Return original if parsing fails
+            return timestamp;
         }
     }
 
@@ -351,6 +437,7 @@ public class AllQueriesController implements Initializable {
     private void applyFilters() {
         String searchText = searchField.getText().toLowerCase().trim();
         String selectedCategory = categoryFilter.getValue();
+        String selectedStatus = statusFilter.getValue();
         
         filteredQueries = allQueries.stream()
             .filter(query -> {
@@ -361,12 +448,16 @@ public class AllQueriesController implements Initializable {
                     String category = query.getString("category");
                     String queryType = query.getString("queryType");
                     String location = query.getString("location");
+                    String userName = query.getString("userName");
+                    String userEmail = query.getString("userEmail");
                     
                     boolean matches = (title != null && title.toLowerCase().contains(searchText)) ||
                                     (description != null && description.toLowerCase().contains(searchText)) ||
                                     (category != null && category.toLowerCase().contains(searchText)) ||
                                     (queryType != null && queryType.toLowerCase().contains(searchText)) ||
-                                    (location != null && location.toLowerCase().contains(searchText));
+                                    (location != null && location.toLowerCase().contains(searchText)) ||
+                                    (userName != null && userName.toLowerCase().contains(searchText)) ||
+                                    (userEmail != null && userEmail.toLowerCase().contains(searchText));
                     if (!matches) return false;
                 }
                 
@@ -374,6 +465,14 @@ public class AllQueriesController implements Initializable {
                 if (!"All Categories".equals(selectedCategory)) {
                     String queryCategory = query.getString("category");
                     if (!selectedCategory.equals(queryCategory)) return false;
+                }
+                
+                // Status filter
+                if (!"All Status".equals(selectedStatus)) {
+                    Boolean solved = query.getBoolean("solved");
+                    boolean isSolved = solved != null && solved;
+                    if ("Solved".equals(selectedStatus) && !isSolved) return false;
+                    if ("Unsolved".equals(selectedStatus) && isSolved) return false;
                 }
                 
                 return true;
@@ -392,17 +491,38 @@ public class AllQueriesController implements Initializable {
         switch (sortOption) {
             case "Newest First":
                 filteredQueries.sort((a, b) -> {
-                    // Since your AddQuery doesn't add timestamp, we'll use MongoDB's _id for ordering
-                    String idA = a.getObjectId("_id").toString();
-                    String idB = b.getObjectId("_id").toString();
-                    return idB.compareTo(idA); // Newer ObjectIds are greater
+                    String dateA = a.getString("submissionDate");
+                    String dateB = b.getString("submissionDate");
+                    if (dateA == null && dateB == null) {
+                        // Fallback to MongoDB ObjectId for ordering
+                        String idA = a.getObjectId("_id").toString();
+                        String idB = b.getObjectId("_id").toString();
+                        return idB.compareTo(idA);
+                    }
+                    if (dateA == null) return 1;
+                    if (dateB == null) return -1;
+                    return dateB.compareTo(dateA);
                 });
                 break;
             case "Oldest First":
                 filteredQueries.sort((a, b) -> {
-                    String idA = a.getObjectId("_id").toString();
-                    String idB = b.getObjectId("_id").toString();
-                    return idA.compareTo(idB);
+                    String dateA = a.getString("submissionDate");
+                    String dateB = b.getString("submissionDate");
+                    if (dateA == null && dateB == null) {
+                        String idA = a.getObjectId("_id").toString();
+                        String idB = b.getObjectId("_id").toString();
+                        return idA.compareTo(idB);
+                    }
+                    if (dateA == null) return 1;
+                    if (dateB == null) return -1;
+                    return dateA.compareTo(dateB);
+                });
+                break;
+            case "Most Recommendations":
+                filteredQueries.sort((a, b) -> {
+                    int recA = getRecommendationCount(a);
+                    int recB = getRecommendationCount(b);
+                    return Integer.compare(recB, recA);
                 });
                 break;
             case "Category A-Z":
@@ -416,14 +536,35 @@ public class AllQueriesController implements Initializable {
                 });
                 break;
             case "Most Popular":
-                // For now, sort by priority (urgent first)
+                // Sort by priority first, then by recommendations
                 filteredQueries.sort((a, b) -> {
                     String priorityA = a.getString("priority");
                     String priorityB = b.getString("priority");
-                    return getPriorityOrder(priorityB) - getPriorityOrder(priorityA);
+                    int priorityCompare = getPriorityOrder(priorityB) - getPriorityOrder(priorityA);
+                    if (priorityCompare != 0) return priorityCompare;
+                    
+                    int recA = getRecommendationCount(a);
+                    int recB = getRecommendationCount(b);
+                    return Integer.compare(recB, recA);
                 });
                 break;
         }
+    }
+    
+    private int getRecommendationCount(Document query) {
+        Object totalRecommendations = query.get("totalRecommendations");
+        if (totalRecommendations == null) return 0;
+        
+        if (totalRecommendations instanceof Integer) {
+            return (Integer) totalRecommendations;
+        } else if (totalRecommendations instanceof String) {
+            try {
+                return Integer.parseInt((String) totalRecommendations);
+            } catch (NumberFormatException e) {
+                return 0;
+            }
+        }
+        return 0;
     }
     
     private int getPriorityOrder(String priority) {
@@ -437,8 +578,16 @@ public class AllQueriesController implements Initializable {
         }
     }
 
+    // FXML Event Handlers
     @FXML
     private void handleRefresh(ActionEvent event) {
+        // Clear search and reset filters
+        searchField.clear();
+        categoryFilter.setValue("All Categories");
+        statusFilter.setValue("All Status");
+        sortComboBox.setValue("Newest First");
+        
+        // Reload queries from database
         loadQueries();
     }
 
@@ -456,5 +605,10 @@ public class AllQueriesController implements Initializable {
     private void handleSort(ActionEvent event) {
         sortQueries();
         displayQueries();
+    }
+
+    @FXML
+    private void handleStatusFilter(ActionEvent event) {
+        applyFilters();
     }
 }

@@ -4,10 +4,21 @@
  */
 package com.productrecommendation.controllers;
 
-/**
- *
- * @author Tanver
- */
 public class SessionManager {
-        public static String loggedInEmail;
+    public static String loggedInEmail;
+    public static String loggedInName;
+
+    public static void setUser(String name, String email) {
+        loggedInName = name;
+        loggedInEmail = email;
+    }
+
+    public static String getLoggedInName() {
+        return loggedInName;
+    }
+
+    public static String getLoggedInEmail() {
+        return loggedInEmail;
+    }
 }
+

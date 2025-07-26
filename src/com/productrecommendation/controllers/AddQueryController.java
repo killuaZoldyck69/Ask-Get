@@ -2,6 +2,7 @@ package com.productrecommendation.controllers;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import static com.productrecommendation.controllers.SessionManager.loggedInName;
 import com.productrecommendation.models.MongoDBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +24,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 import org.bson.Document;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class AddQueryController implements Initializable {
 
@@ -112,6 +116,8 @@ public class AddQueryController implements Initializable {
     // Data Storage
     private List<String> imageUrls = new ArrayList<>();
     private QueryData queryData = new QueryData();
+    private final String loggedInEmail = SessionManager.loggedInEmail; // ✅ Dynamic way
+    private final String currentUserName = SessionManager.loggedInName;
 
     // Reference to parent dashboard controller
     private Object dashboardController;
@@ -565,7 +571,13 @@ public class AddQueryController implements Initializable {
                     .append("isPublic", queryData.isPublic())
                     .append("emailNotifications", queryData.isEmailNotifications())
                     .append("allowComments", queryData.isAllowComments())
-                    .append("allowAnonymous", queryData.isAllowAnonymous());
+                    .append("allowAnonymous", queryData.isAllowAnonymous())
+                    // ✅ Additional Fields
+                    .append("userName", currentUserName)
+                    .append("userEmail", loggedInEmail)
+                    .append("solved", false)
+                    .append("totalRecommendations", 0)
+                    .append("submissionDate", LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
             // Insert the document
             collection.insertOne(doc);

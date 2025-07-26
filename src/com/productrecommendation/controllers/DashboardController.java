@@ -195,7 +195,7 @@ public class DashboardController implements Initializable {
     @FXML
     private void handleMyQueries(ActionEvent event) {
         // Load MyQueries.fxml in the center area
-        loadContentInCenter("/fxml/MyQueries.fxml"); // Adjust path as needed
+        loadContentInCenter("/resources/com/productrecommendation/fxml/MyQueries.fxml"); // Adjust path as needed
         updateNavigationButtons(myQueriesBtn);
     }
 

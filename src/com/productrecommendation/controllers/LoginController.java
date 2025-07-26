@@ -2,6 +2,7 @@ package com.productrecommendation.controllers;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import static com.productrecommendation.controllers.SessionManager.loggedInName;
 import com.productrecommendation.models.MongoDBConnection;
 
 
@@ -58,6 +59,7 @@ public class LoginController {
 
                     // ✅ Save logged-in email in session
                     SessionManager.loggedInEmail = email;
+                    SessionManager.loggedInName = user.getString("display_name");
 
                     // Load and show Dashboard
                     Parent dashboardView = FXMLLoader.load(getClass().getResource("/resources/com/productrecommendation/fxml/Dashboard.fxml"));
