@@ -91,7 +91,6 @@ public class LoginController {
         // TODO: Add password reset logic
     }
 
-    @FXML
     public void onGoogleLogin(ActionEvent event) {
         System.out.println("Google login requested");
         // TODO: Add OAuth logic

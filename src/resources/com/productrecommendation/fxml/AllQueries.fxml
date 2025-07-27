@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.productrecommendation.controllers.AllQueriesController">
+<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.productrecommendation.controllers.AllQueriesController">
     <padding>
         <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
     </padding>
@@ -31,7 +34,7 @@
                 </Label>
             </VBox>
             <Region HBox.hgrow="ALWAYS" />
-            <Button fx:id="refreshBtn" text="🔄 Refresh" style="-fx-background-color: #4F46E5; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8;" onAction="#handleRefresh">
+            <Button fx:id="refreshBtn" onAction="#handleRefresh" style="-fx-background-color: #4F46E5; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8;" text="🔄 Refresh">
                 <font>
                     <Font name="System Bold" size="14.0" />
                 </font>
@@ -40,10 +43,10 @@
       
         <!-- Search and Filter Section -->
         <HBox alignment="CENTER_LEFT" spacing="15.0">
-            <TextField fx:id="searchField" promptText="Search queries..." prefWidth="300.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onKeyReleased="#handleSearch" />
-            <ComboBox fx:id="categoryFilter" promptText="All Categories" prefWidth="150.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onAction="#handleCategoryFilter" />
-            <ComboBox fx:id="sortComboBox" prefWidth="120.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onAction="#handleSort" />
-            <ComboBox fx:id="statusFilter" promptText="All Status" prefWidth="120.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" onAction="#handleStatusFilter" />
+            <TextField fx:id="searchField" onKeyReleased="#handleSearch" prefWidth="300.0" promptText="Search queries..." style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <ComboBox fx:id="categoryFilter" onAction="#handleCategoryFilter" prefWidth="150.0" promptText="All Categories" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <ComboBox fx:id="sortComboBox" onAction="#handleSort" prefWidth="120.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" />
+            <ComboBox fx:id="statusFilter" onAction="#handleStatusFilter" prefWidth="120.0" promptText="All Status" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" />
             <Region HBox.hgrow="ALWAYS" />
             <Label fx:id="totalQueriesLabel" text="Total: 0 queries" textFill="#6B7280">
                 <font>
@@ -73,8 +76,8 @@
             </VBox>
         </StackPane>
       
-        <!-- Queries Container -->
-        <ScrollPane fx:id="queriesScrollPane" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED" style="-fx-background-color: transparent; -fx-border-color: transparent;" VBox.vgrow="ALWAYS">
+                    <!-- Queries Container -->
+        <ScrollPane fx:id="queriesScrollPane" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-border-color: transparent;" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
             <VBox fx:id="queriesContainer" spacing="15.0" />
         </ScrollPane>
       

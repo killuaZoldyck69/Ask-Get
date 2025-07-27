@@ -33,8 +33,6 @@ public class AddQueryController implements Initializable {
     // Header Controls
     @FXML
     private Button backBtn;
-    @FXML
-    private Button saveAsDraftBtn;
 
     // Form Controls
     @FXML
@@ -75,6 +73,7 @@ public class AddQueryController implements Initializable {
     private RadioButton highPriorityRadio;
     @FXML
     private RadioButton urgentPriorityRadio;
+    @FXML
     private ToggleGroup priorityGroup;
 
     // Description and Content
@@ -94,13 +93,9 @@ public class AddQueryController implements Initializable {
     // Tags and Preferences
     @FXML
     private TextField tagsField;
-    @FXML
     private CheckBox allowPublicCheckBox;
-    @FXML
     private CheckBox emailNotificationCheckBox;
-    @FXML
     private CheckBox allowCommentsCheckBox;
-    @FXML
     private CheckBox allowAnonymousCheckBox;
 
     // Action Buttons
@@ -410,7 +405,6 @@ public class AddQueryController implements Initializable {
         }
     }
 
-    @FXML
     private void handleSaveAsDraft() {
         if (validateMinimumFields()) {
             collectFormData();

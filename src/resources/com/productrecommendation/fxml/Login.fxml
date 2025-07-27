@@ -60,14 +60,6 @@
             
             <Label alignment="CENTER" styleClass="or-label" text="OR" />
             
-            <Button maxWidth="Infinity" onAction="#onGoogleLogin" styleClass="google-login-button" text="Login with Google">
-                <graphic>
-                    <ImageView fitHeight="20" fitWidth="20" preserveRatio="true">
-                        <Image url="@../assets/google.png" />
-                    </ImageView>
-                </graphic>
-            </Button>
-            
             <HBox alignment="CENTER" spacing="5">
                 <Label text="Don't have an account?" />
                 <Hyperlink onAction="#onSignUpClicked" styleClass="signup-link" text="Sign up" />

@@ -28,8 +28,6 @@ public class DashboardController implements Initializable {
     @FXML
     private BorderPane mainBorderPane; // Add this to reference the main BorderPane
     @FXML
-    private TextField searchField;
-    @FXML
     private Button notificationBtn;
     @FXML
     private Button settingsBtn;
@@ -74,19 +72,11 @@ public class DashboardController implements Initializable {
     @FXML
     private Label activeUsersChangeLabel;
     @FXML
-    private Label engagementRateCardLabel;
-    @FXML
-    private Label engagementRateChangeLabel;
-    @FXML
     private VBox recentQueriesBox;
     @FXML
     private Button recentQueriesSettingsBtn;
     @FXML
     private VBox queryItemsContainer;
-    @FXML
-    private VBox trendingCategoriesBox;
-    @FXML
-    private VBox categoryItemsContainer;
 
     // Store the original dashboard content for switching back
     private Node originalDashboardContent;
@@ -135,10 +125,6 @@ public class DashboardController implements Initializable {
         updateNavigationButtons(dashboardBtn);
     }
 
-    @FXML
-    private void handleSearch(ActionEvent event) {
-        // Implementation for search functionality
-    }
 
     @FXML
     private void handleNotification(ActionEvent event) {

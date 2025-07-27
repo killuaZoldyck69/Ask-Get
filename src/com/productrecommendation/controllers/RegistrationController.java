@@ -96,9 +96,6 @@ private void onSignUpButtonClicked(ActionEvent event) {
 }
 
 
-    @FXML
-    private void onGoogleSignUp(ActionEvent event) {
-    }
 
     @FXML
     private void onLoginClicked(ActionEvent event) {

@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<ScrollPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.productrecommendation.controllers.AddQueryController" 
-            fitToWidth="true" style="-fx-background-color: #F9FAFB; -fx-background: #F9FAFB;">
-    <VBox spacing="25.0" style="-fx-background-color: #F9FAFB;" maxWidth="Infinity">
+<ScrollPane fitToWidth="true" style="-fx-background-color: #F9FAFB; -fx-background: #F9FAFB;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.productrecommendation.controllers.AddQueryController">
+    <VBox maxWidth="Infinity" spacing="25.0" style="-fx-background-color: #F9FAFB;">
         <padding>
             <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
         </padding>
@@ -15,17 +24,12 @@
         <!-- Header Section -->
         <VBox spacing="10.0">
             <HBox alignment="CENTER_LEFT" spacing="15.0">
-                <Button fx:id="backBtn" text="← Back" style="-fx-background-color: #F3F4F6; -fx-text-fill: #6B7280; -fx-background-radius: 8; -fx-border-radius: 8;" onAction="#handleBack">
+                <Button fx:id="backBtn" onAction="#handleBack" style="-fx-background-color: #F3F4F6; -fx-text-fill: #6B7280; -fx-background-radius: 8; -fx-border-radius: 8;" text="← Back">
                     <font>
                         <Font size="14.0" />
                     </font>
                 </Button>
                 <Region HBox.hgrow="ALWAYS" />
-                <Button fx:id="saveAsDraftBtn" text="💾 Save as Draft" style="-fx-background-color: #F3F4F6; -fx-text-fill: #6B7280; -fx-background-radius: 8; -fx-border-radius: 8;" onAction="#handleSaveAsDraft">
-                    <font>
-                        <Font size="14.0" />
-                    </font>
-                </Button>
             </HBox>
           
             <Label text="Create New Query" textFill="#1F2937">
@@ -53,12 +57,7 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <ComboBox fx:id="queryTypeComboBox" 
-                          promptText="Select query type" 
-                          style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;" 
-                          prefWidth="300.0" 
-                          prefHeight="45.0"
-                          onAction="#handleQueryTypeChange">
+                <ComboBox fx:id="queryTypeComboBox" onAction="#handleQueryTypeChange" prefHeight="45.0" prefWidth="300.0" promptText="Select query type" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;">
                 </ComboBox>
             </VBox>
 
@@ -83,16 +82,12 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <ComboBox fx:id="categoryComboBox" 
-                          promptText="Select a category" 
-                          style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;" 
-                          prefWidth="300.0" 
-                          prefHeight="45.0">
+                <ComboBox fx:id="categoryComboBox" prefHeight="45.0" prefWidth="300.0" promptText="Select a category" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;">
                 </ComboBox>
             </VBox>
 
             <!-- Budget Range (Conditional - only for purchase queries) -->
-            <HBox fx:id="budgetSection" spacing="20.0" visible="false" managed="false">
+            <HBox fx:id="budgetSection" managed="false" spacing="20.0" visible="false">
                 <VBox spacing="8.0" HBox.hgrow="ALWAYS">
                     <Label text="Min Budget" textFill="#374151">
                         <font>
@@ -123,17 +118,13 @@
                             <Font name="System Bold" size="14.0" />
                         </font>
                     </Label>
-                    <ComboBox fx:id="currencyComboBox" value="USD" 
-                              promptText="Select currency" 
-                              style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;" 
-                              prefWidth="120.0" 
-                              prefHeight="45.0">
+                    <ComboBox fx:id="currencyComboBox" prefHeight="45.0" prefWidth="120.0" promptText="Select currency" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;" value="USD">
                     </ComboBox>
                 </VBox>
             </HBox>
 
             <!-- Location (Conditional - for location-based queries) -->
-            <VBox fx:id="locationSection" spacing="8.0" visible="false" managed="false">
+            <VBox fx:id="locationSection" managed="false" spacing="8.0" visible="false">
                 <Label text="Location" textFill="#374151">
                     <font>
                         <Font name="System Bold" size="14.0" />
@@ -147,14 +138,14 @@
             </VBox>
 
             <!-- Duration/Timeline (Conditional - for service queries) -->
-            <HBox fx:id="timelineSection" spacing="20.0" visible="false" managed="false">
+            <HBox fx:id="timelineSection" managed="false" spacing="20.0" visible="false">
                 <VBox spacing="8.0" HBox.hgrow="ALWAYS">
                     <Label text="Expected Start Date" textFill="#374151">
                         <font>
                             <Font name="System Bold" size="14.0" />
                         </font>
                     </Label>
-                    <DatePicker fx:id="startDatePicker" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" prefHeight="45.0">
+                    <DatePicker fx:id="startDatePicker" prefHeight="45.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;">
                     </DatePicker>
                 </VBox>
                 <VBox spacing="8.0" HBox.hgrow="ALWAYS">
@@ -163,7 +154,7 @@
                             <Font name="System Bold" size="14.0" />
                         </font>
                     </Label>
-                    <DatePicker fx:id="endDatePicker" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" prefHeight="45.0">
+                    <DatePicker fx:id="endDatePicker" prefHeight="45.0" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;">
                     </DatePicker>
                 </VBox>
             </HBox>
@@ -176,12 +167,15 @@
                     </font>
                 </Label>
                 <HBox spacing="10.0">
-                    <RadioButton fx:id="lowPriorityRadio" text="Low" textFill="#6B7280" toggleGroup="$priorityGroup">
+                    <RadioButton fx:id="lowPriorityRadio" text="Low" textFill="#6B7280">
                         <font>
                             <Font size="14.0" />
                         </font>
+                  <toggleGroup>
+                     <ToggleGroup fx:id="priorityGroup" />
+                  </toggleGroup>
                     </RadioButton>
-                    <RadioButton fx:id="mediumPriorityRadio" text="Medium" textFill="#6B7280" selected="true" toggleGroup="$priorityGroup">
+                    <RadioButton fx:id="mediumPriorityRadio" selected="true" text="Medium" textFill="#6B7280" toggleGroup="$priorityGroup">
                         <font>
                             <Font size="14.0" />
                         </font>
@@ -206,7 +200,7 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <TextArea fx:id="descriptionArea" promptText="Describe your query in detail. Include specific requirements, context, preferences, or any other relevant information that will help others provide better responses." wrapText="true" prefRowCount="4" maxHeight="120" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;">
+                <TextArea fx:id="descriptionArea" maxHeight="120" prefRowCount="4" promptText="Describe your query in detail. Include specific requirements, context, preferences, or any other relevant information that will help others provide better responses." style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8;" wrapText="true">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -233,13 +227,13 @@
                             <Font size="12.0" />
                         </font>
                     </Label>
-                    <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <HBox alignment="CENTER_LEFT" spacing="10.0">
                         <TextField fx:id="imageUrlField" promptText="Paste image URL here (https://...)" style="-fx-background-color: #F9FAFB; -fx-border-color: #E5E7EB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-pref-height: 40;" HBox.hgrow="ALWAYS">
                             <font>
                                 <Font size="14.0" />
                             </font>
                         </TextField>
-                        <Button fx:id="addImageBtn" text="➕ Add" style="-fx-background-color: #10B981; -fx-text-fill: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-pref-height: 40;" onAction="#handleAddImage">
+                        <Button fx:id="addImageBtn" onAction="#handleAddImage" style="-fx-background-color: #10B981; -fx-text-fill: white; -fx-background-radius: 6; -fx-border-radius: 6; -fx-pref-height: 40;" text="➕ Add">
                             <font>
                                 <Font size="12.0" />
                             </font>
@@ -248,7 +242,7 @@
                 </VBox>
                 
                 <!-- Image Preview Container -->
-                <ScrollPane fx:id="imagePreviewScrollPane" style="-fx-background-color: transparent; -fx-border-color: #E5E7EB; -fx-border-radius: 8;" prefHeight="100.0" maxHeight="120.0" visible="false" managed="false">
+                <ScrollPane fx:id="imagePreviewScrollPane" managed="false" maxHeight="120.0" prefHeight="100.0" style="-fx-background-color: transparent; -fx-border-color: #E5E7EB; -fx-border-radius: 8;" visible="false">
                     <HBox fx:id="imagePreviewContainer" spacing="10.0" style="-fx-padding: 10;">
                     </HBox>
                 </ScrollPane>
@@ -281,44 +275,22 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Label>
-                <VBox spacing="8.0">
-                    <CheckBox fx:id="allowPublicCheckBox" text="Make this query public (visible to all users)" selected="true" textFill="#6B7280">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </CheckBox>
-                    <CheckBox fx:id="emailNotificationCheckBox" text="Email me when I receive responses" selected="true" textFill="#6B7280">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </CheckBox>
-                    <CheckBox fx:id="allowCommentsCheckBox" text="Allow others to ask questions or request clarifications" selected="true" textFill="#6B7280">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </CheckBox>
-                    <CheckBox fx:id="allowAnonymousCheckBox" text="Allow anonymous responses" selected="false" textFill="#6B7280">
-                        <font>
-                            <Font size="14.0" />
-                        </font>
-                    </CheckBox>
-                </VBox>
             </VBox>
         </VBox>
 
         <!-- Action Buttons -->
-        <HBox spacing="15.0" alignment="CENTER_RIGHT">
-            <Button fx:id="previewBtn" text="👁 Preview" style="-fx-background-color: #F3F4F6; -fx-text-fill: #6B7280; -fx-background-radius: 8; -fx-border-radius: 8; -fx-pref-width: 120; -fx-pref-height: 45;" onAction="#handlePreview">
+        <HBox alignment="CENTER_RIGHT" spacing="15.0">
+            <Button fx:id="previewBtn" onAction="#handlePreview" style="-fx-background-color: #F3F4F6; -fx-text-fill: #6B7280; -fx-background-radius: 8; -fx-border-radius: 8; -fx-pref-width: 120; -fx-pref-height: 45;" text="👁 Preview">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Button>
-            <Button fx:id="cancelBtn" text="Cancel" style="-fx-background-color: #F3F4F6; -fx-text-fill: #6B7280; -fx-background-radius: 8; -fx-border-radius: 8; -fx-pref-width: 120; -fx-pref-height: 45;" onAction="#handleCancel">
+            <Button fx:id="cancelBtn" onAction="#handleCancel" style="-fx-background-color: #F3F4F6; -fx-text-fill: #6B7280; -fx-background-radius: 8; -fx-border-radius: 8; -fx-pref-width: 120; -fx-pref-height: 45;" text="Cancel">
                 <font>
                     <Font size="14.0" />
                 </font>
             </Button>
-            <Button fx:id="submitBtn" text="🚀 Submit Query" style="-fx-background-color: #4F46E5; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8; -fx-pref-width: 150; -fx-pref-height: 45;" onAction="#handleSubmit">
+            <Button fx:id="submitBtn" onAction="#handleSubmit" style="-fx-background-color: #4F46E5; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8; -fx-pref-width: 150; -fx-pref-height: 45;" text="🚀 Submit Query">
                 <font>
                     <Font name="System Bold" size="14.0" />
                 </font>
