@@ -267,15 +267,6 @@
                     </font>
                 </TextField>
             </VBox>
-
-            <!-- Preferences -->
-            <VBox spacing="12.0">
-                <Label text="Preferences" textFill="#374151">
-                    <font>
-                        <Font name="System Bold" size="14.0" />
-                    </font>
-                </Label>
-            </VBox>
         </VBox>
 
         <!-- Action Buttons -->

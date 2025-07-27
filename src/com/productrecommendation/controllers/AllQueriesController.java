@@ -8,6 +8,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.FindIterable;
 import com.productrecommendation.models.MongoDBConnection;
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -17,13 +18,17 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import org.bson.Document;
 
 /**
@@ -352,11 +357,49 @@ public class AllQueriesController implements Initializable {
             card.getChildren().add(metaInfo2);
         }
         
-        // Hover effect
-        card.setOnMouseEntered(e -> card.setStyle("-fx-background-color: #F1F5F9; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CBD5E1; -fx-border-width: 1; -fx-cursor: hand;"));
-        card.setOnMouseExited(e -> card.setStyle("-fx-background-color: #F8F9FA; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E5E7EB; -fx-border-width: 1;"));
+        // Hover effect and click functionality
+        card.setOnMouseEntered(e -> {
+            card.setStyle("-fx-background-color: #F1F5F9; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #CBD5E1; -fx-border-width: 1; -fx-cursor: hand;");
+        });
+        
+        card.setOnMouseExited(e -> {
+            card.setStyle("-fx-background-color: #F8F9FA; -fx-background-radius: 8; -fx-border-radius: 8; -fx-border-color: #E5E7EB; -fx-border-width: 1;");
+        });
+        
+        // Add click event to navigate to query details
+        card.setOnMouseClicked(e -> openQueryDetails(query));
         
         return card;
+    }
+    
+    /**
+     * Opens the query details view for the selected query
+     */
+    private void openQueryDetails(Document query) {
+        try {
+            // Load the QueryDetails FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/resources/com/productrecommendation/fxml/QueryDetails.fxml"));
+            Parent root = loader.load();
+            
+            // Get the controller and set the query document
+            QueryDetailsController controller = loader.getController();
+            controller.setQueryDocument(query);
+            
+            // Get current stage and set the new scene
+            Stage currentStage = (Stage) queriesContainer.getScene().getWindow();
+            controller.setPreviousStage(currentStage);
+            
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.setTitle("Query Details - Product Recommendation System");
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+            showError("Failed to open query details: " + e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+            showError("An unexpected error occurred while opening query details: " + e.getMessage());
+        }
     }
     
     private String getPriorityIcon(String priority) {

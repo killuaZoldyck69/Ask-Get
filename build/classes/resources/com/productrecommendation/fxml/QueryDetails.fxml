@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.productrecommendation.controllers.QueryDetailsController">
+    <padding>
+        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+    </padding>
+   
+    <!-- Header Section -->
+    <HBox alignment="CENTER_LEFT" spacing="15.0">
+        <Button fx:id="backBtn" onAction="#handleBack" style="-fx-background-color: #6B7280; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8;" text="← Back">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+        <Label text="Query Details" textFill="#1F2937">
+            <font>
+                <Font name="System Bold" size="28.0" />
+            </font>
+        </Label>
+        <Region HBox.hgrow="ALWAYS" />
+        <Button fx:id="editBtn" onAction="#handleEdit" style="-fx-background-color: #4F46E5; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8;" text="✏️ Edit">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+        <Button fx:id="deleteBtn" onAction="#handleDelete" style="-fx-background-color: #EF4444; -fx-text-fill: white; -fx-background-radius: 8; -fx-border-radius: 8;" text="🗑️ Delete">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Button>
+    </HBox>
+   
+    <Region prefHeight="20.0" />
+   
+    <!-- Main Content -->
+    <ScrollPane fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-border-color: transparent;" vbarPolicy="AS_NEEDED" VBox.vgrow="ALWAYS">
+        <VBox spacing="25.0" style="-fx-background-color: white; -fx-background-radius: 12; -fx-border-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);">
+            <padding>
+                <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+            </padding>
+            
+            <!-- Title and Status Section -->
+            <VBox spacing="15.0">
+                <HBox alignment="CENTER_LEFT" spacing="15.0">
+                    <Label fx:id="titleLabel" style="-fx-text-fill: #1F2937; -fx-font-weight: bold; -fx-font-size: 24px;" wrapText="true">
+                        <font>
+                            <Font name="System Bold" size="24.0" />
+                        </font>
+                    </Label>
+                    <Region HBox.hgrow="ALWAYS" />
+                    <Label fx:id="statusBadge" style="-fx-background-radius: 12; -fx-font-size: 12px; -fx-padding: 5 12 5 12;">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Label>
+                </HBox>
+                
+                <!-- Query Type, Category, and Priority -->
+                <HBox spacing="10.0">
+                    <Label fx:id="queryTypeBadge" style="-fx-background-color: #E0F2FE; -fx-text-fill: #0369A1; -fx-background-radius: 12; -fx-font-size: 12px; -fx-padding: 5 12 5 12;">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="categoryBadge" style="-fx-background-color: #EEF2FF; -fx-text-fill: #4F46E5; -fx-background-radius: 12; -fx-font-size: 12px; -fx-padding: 5 12 5 12;">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="priorityBadge" style="-fx-background-radius: 12; -fx-font-size: 12px; -fx-padding: 5 12 5 12;">
+                        <font>
+                            <Font name="System Bold" size="12.0" />
+                        </font>
+                    </Label>
+                </HBox>
+            </VBox>
+            
+            <Separator />
+            
+            <!-- Description Section -->
+            <VBox spacing="10.0">
+                <Label text="Description" style="-fx-text-fill: #1F2937; -fx-font-weight: bold; -fx-font-size: 18px;">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="descriptionLabel" style="-fx-text-fill: #4B5563; -fx-font-size: 14px;" wrapText="true">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </VBox>
+            
+            <Separator />
+            
+            <!-- User Information Section -->
+            <VBox spacing="15.0">
+                <Label text="User Information" style="-fx-text-fill: #1F2937; -fx-font-weight: bold; -fx-font-size: 18px;">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <VBox spacing="8.0">
+                    <HBox spacing="10.0">
+                        <Label text="👤 Name:" style="-fx-text-fill: #6B7280; -fx-font-size: 14px; -fx-min-width: 100;">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="userNameLabel" style="-fx-text-fill: #1F2937; -fx-font-size: 14px;">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </HBox>
+                    <HBox spacing="10.0">
+                        <Label text="📧 Email:" style="-fx-text-fill: #6B7280; -fx-font-size: 14px; -fx-min-width: 100;">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="userEmailLabel" style="-fx-text-fill: #1F2937; -fx-font-size: 14px;">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </HBox>
+                    <HBox spacing="10.0">
+                        <Label text="📅 Submitted:" style="-fx-text-fill: #6B7280; -fx-font-size: 14px; -fx-min-width: 100;">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="submissionDateLabel" style="-fx-text-fill: #1F2937; -fx-font-size: 14px;">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </HBox>
+                </VBox>
+            </VBox>
+            
+            <Separator />
+            
+            <!-- Budget and Location Section -->
+            <VBox spacing="15.0">
+                <Label text="Project Details" style="-fx-text-fill: #1F2937; -fx-font-weight: bold; -fx-font-size: 18px;">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <VBox spacing="8.0">
+                    <HBox spacing="10.0" fx:id="budgetRow">
+                        <Label text="💰 Budget:" style="-fx-text-fill: #6B7280; -fx-font-size: 14px; -fx-min-width: 100;">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="budgetLabel" style="-fx-text-fill: #059669; -fx-font-size: 14px;">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                    </HBox>
+                    <HBox spacing="10.0" fx:id="locationRow">
+                        <Label text="📍 Location:" style="-fx-text-fill: #6B7280; -fx-font-size: 14px; -fx-min-width: 100;">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="locationLabel" style="-fx-text-fill: #1F2937; -fx-font-size: 14px;">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </HBox>
+                    <HBox spacing="10.0" fx:id="timelineRow">
+                        <Label text="📅 Timeline:" style="-fx-text-fill: #6B7280; -fx-font-size: 14px; -fx-min-width: 100;">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="timelineLabel" style="-fx-text-fill: #1F2937; -fx-font-size: 14px;">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </HBox>
+                    <HBox spacing="10.0" fx:id="recommendationsRow">
+                        <Label text="💡 Recommendations:" style="-fx-text-fill: #6B7280; -fx-font-size: 14px; -fx-min-width: 100;">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="recommendationsLabel" style="-fx-text-fill: #1F2937; -fx-font-size: 14px;">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                    </HBox>
+                </VBox>
+            </VBox>
+            
+            <Separator />
+            
+            <!-- Tags Section -->
+            <VBox spacing="10.0" fx:id="tagsSection">
+                <Label text="Tags" style="-fx-text-fill: #1F2937; -fx-font-weight: bold; -fx-font-size: 18px;">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <HBox fx:id="tagsContainer" spacing="8.0" />
+            </VBox>
+            
+            <!-- Images Section -->
+            <VBox spacing="10.0" fx:id="imagesSection">
+                <Label text="Images" style="-fx-text-fill: #1F2937; -fx-font-weight: bold; -fx-font-size: 18px;">
+                    <font>
+                        <Font name="System Bold" size="18.0" />
+                    </font>
+                </Label>
+                <VBox fx:id="imagesContainer" spacing="10.0" />
+            </VBox>
+            
+            <Separator />
+            
+            <!-- Comments Section -->
+            <VBox spacing="15.0" fx:id="commentsSection">
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <Label text="Comments" style="-fx-text-fill: #1F2937; -fx-font-weight: bold; -fx-font-size: 18px;">
+                        <font>
+                            <Font name="System Bold" size="18.0" />
+                        </font>
+                    </Label>
+                    <Label fx:id="commentsCountLabel" text="(0)" style="-fx-text-fill: #6B7280; -fx-font-size: 14px;">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Label>
+                </HBox>
+                
+                <!-- Add Comment Form -->
+                <VBox spacing="10.0" style="-fx-background-color: #F9FAFB; -fx-background-radius: 8; -fx-padding: 15;">
+                    <!-- Hidden comment author field (will be hidden by controller) -->
+                    <TextField fx:id="commentAuthorField" promptText="Your name" style="-fx-pref-width: 200; -fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #D1D5DB;" visible="false" managed="false">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </TextField>
+                    
+                    <TextArea fx:id="commentTextArea" promptText="Write your comment here..." wrapText="true" prefRowCount="3" style="-fx-background-radius: 6; -fx-border-radius: 6; -fx-border-color: #D1D5DB;">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </TextArea>
+                    
+                    <HBox alignment="CENTER_RIGHT">
+                        <Button fx:id="addCommentBtn" onAction="#handleAddComment" text="💬 Add Comment" style="-fx-background-color: #10B981; -fx-text-fill: white; -fx-background-radius: 6; -fx-border-radius: 6;">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Button>
+                    </HBox>
+                </VBox>
+                
+                <!-- Comments List -->
+                <VBox fx:id="commentsContainer" spacing="10.0" />
+                
+                <!-- No Comments Message -->
+                <VBox fx:id="noCommentsMessage" alignment="CENTER" spacing="10.0" style="-fx-background-color: #F9FAFB; -fx-background-radius: 8; -fx-padding: 30;">
+                    <Label text="💬" style="-fx-font-size: 24px;" />
+                    <Label text="No comments yet" style="-fx-text-fill: #6B7280; -fx-font-size: 16px;">
+                        <font>
+                            <Font name="System Bold" size="16.0" />
+                        </font>
+                    </Label>
+                    <Label text="Be the first to share your thoughts!" style="-fx-text-fill: #9CA3AF; -fx-font-size: 14px;">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </Label>
+                </VBox>
+            </VBox>
+        </VBox>
+    </ScrollPane>
+</VBox>

@@ -90,13 +90,9 @@ public class AddQueryController implements Initializable {
     @FXML
     private HBox imagePreviewContainer;
 
-    // Tags and Preferences
+    // Tags
     @FXML
     private TextField tagsField;
-    private CheckBox allowPublicCheckBox;
-    private CheckBox emailNotificationCheckBox;
-    private CheckBox allowCommentsCheckBox;
-    private CheckBox allowAnonymousCheckBox;
 
     // Action Buttons
     @FXML
@@ -534,12 +530,6 @@ public class AddQueryController implements Initializable {
 
         // Images
         queryData.setImageUrls(new ArrayList<>(imageUrls));
-
-        // Preferences
-        queryData.setPublic(allowPublicCheckBox.isSelected());
-        queryData.setEmailNotifications(emailNotificationCheckBox.isSelected());
-        queryData.setAllowComments(allowCommentsCheckBox.isSelected());
-        queryData.setAllowAnonymous(allowAnonymousCheckBox.isSelected());
     }
 
     private void submitQuery() {
@@ -562,10 +552,6 @@ public class AddQueryController implements Initializable {
                     .append("endDate", queryData.getEndDate() != null ? queryData.getEndDate().toString() : null)
                     .append("tags", queryData.getTags())
                     .append("imageUrls", queryData.getImageUrls())
-                    .append("isPublic", queryData.isPublic())
-                    .append("emailNotifications", queryData.isEmailNotifications())
-                    .append("allowComments", queryData.isAllowComments())
-                    .append("allowAnonymous", queryData.isAllowAnonymous())
                     // ✅ Additional Fields
                     .append("userName", currentUserName)
                     .append("userEmail", loggedInEmail)
@@ -680,10 +666,6 @@ public class AddQueryController implements Initializable {
         private LocalDate endDate;
         private List<String> tags = new ArrayList<>();
         private List<String> imageUrls = new ArrayList<>();
-        private boolean isPublic = true;
-        private boolean emailNotifications = true;
-        private boolean allowComments = true;
-        private boolean allowAnonymous = false;
 
         // Getters and setters
         public String getQueryType() {
@@ -788,38 +770,6 @@ public class AddQueryController implements Initializable {
 
         public void setImageUrls(List<String> imageUrls) {
             this.imageUrls = imageUrls;
-        }
-
-        public boolean isPublic() {
-            return isPublic;
-        }
-
-        public void setPublic(boolean isPublic) {
-            this.isPublic = isPublic;
-        }
-
-        public boolean isEmailNotifications() {
-            return emailNotifications;
-        }
-
-        public void setEmailNotifications(boolean emailNotifications) {
-            this.emailNotifications = emailNotifications;
-        }
-
-        public boolean isAllowComments() {
-            return allowComments;
-        }
-
-        public void setAllowComments(boolean allowComments) {
-            this.allowComments = allowComments;
-        }
-
-        public boolean isAllowAnonymous() {
-            return allowAnonymous;
-        }
-
-        public void setAllowAnonymous(boolean allowAnonymous) {
-            this.allowAnonymous = allowAnonymous;
         }
     }
 }

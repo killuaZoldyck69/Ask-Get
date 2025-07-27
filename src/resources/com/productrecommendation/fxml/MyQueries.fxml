@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -49,37 +47,16 @@
          </children>
       </HBox>
       
-   <!-- Table Section + Dynamic Cards Section -->
-<VBox spacing="10.0" VBox.vgrow="ALWAYS">
-   <children>
-      <TableView fx:id="queriesTable" prefHeight="400.0" style="-fx-background-radius: 8; -fx-border-radius: 8;">
-         <columns>
-            <TableColumn fx:id="titleColumn" prefWidth="200.0" text="Title" />
-            <TableColumn fx:id="descriptionColumn" prefWidth="300.0" text="Description" />
-            <TableColumn fx:id="statusColumn" prefWidth="100.0" text="Status" />
-            <TableColumn fx:id="dateColumn" prefWidth="150.0" text="Created Date" />
-         </columns>
-      </TableView>
-
-      <!-- Dynamic Query Cards Container -->
-      <VBox fx:id="myQueryContainer" spacing="10.0" />
-
-      <!-- Action Buttons -->
-      <HBox alignment="CENTER_LEFT" spacing="10.0">
-         <children>
-            <Button onAction="#viewQueryDetails" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-background-radius: 6; -fx-border-radius: 6;" text="View Details">
-               <font><Font size="12.0" /></font>
-            </Button>
-            <Button onAction="#editQuery" style="-fx-background-color: #f59e0b; -fx-text-fill: white; -fx-background-radius: 6; -fx-border-radius: 6;" text="Edit">
-               <font><Font size="12.0" /></font>
-            </Button>
-            <Button onAction="#deleteQuery" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-background-radius: 6; -fx-border-radius: 6;" text="Delete">
-               <font><Font size="12.0" /></font>
-            </Button>
-         </children>
-      </HBox>
-   </children>
-</VBox>
+      <!-- Scrollable Query Cards Container -->
+      <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;" VBox.vgrow="ALWAYS">
+         <content>
+            <VBox fx:id="myQueryContainer" spacing="15.0" style="-fx-background-color: transparent;">
+               <padding>
+                  <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+               </padding>
+            </VBox>
+         </content>
+      </ScrollPane>
    </children>
    <padding>
       <Insets bottom="20.0" left="30.0" right="30.0" top="20.0" />
