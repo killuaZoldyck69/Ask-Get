@@ -84,11 +84,6 @@
                   <Font size="14.0" />
                </font>
             </Button>
-            <Button fx:id="recommendationsForMeBtn" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" onAction="#handleRecommendationsForMe" prefHeight="40.0" style="-fx-background-color: transparent; -fx-text-fill: #6B7280; -fx-background-radius: 8;" text="🎯 Recommendations for Me">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
          </VBox>
          
          <Region VBox.vgrow="ALWAYS" />

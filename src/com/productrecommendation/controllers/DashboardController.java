@@ -125,7 +125,6 @@ public class DashboardController implements Initializable {
         updateNavigationButtons(dashboardBtn);
     }
 
-
     @FXML
     private void handleNotification(ActionEvent event) {
         // Implementation for notifications
@@ -188,15 +187,8 @@ public class DashboardController implements Initializable {
     @FXML
     private void handleMyRecommendations(ActionEvent event) {
         // Load MyRecommendations.fxml in the center area
-        loadContentInCenter("/fxml/MyRecommendations.fxml"); // Adjust path as needed
+        loadContentInCenter("/resources/com/productrecommendation/fxml/MyRecommendations.fxml");
         updateNavigationButtons(myRecommendationsBtn);
-    }
-
-    @FXML
-    private void handleRecommendationsForMe(ActionEvent event) {
-        // Load RecommendationsForMe.fxml in the center area
-        loadContentInCenter("/fxml/RecommendationsForMe.fxml"); // Adjust path as needed
-        updateNavigationButtons(recommendationsForMeBtn);
     }
 
     @FXML
